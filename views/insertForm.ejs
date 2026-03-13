@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Application Form</title>
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+  </head>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    fieldset {
+      width: 90%;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      text-align: left;
+      padding: 10px;
+    }
+
+    input,
+    select {
+      width: 200px;
+      height: 25px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 60px;
+    }
+
+    span {
+      color: red;
+      font-size: 12px;
+    }
+  </style>
+
+  <body>
+    <h1 align="center">JOB APPLICATION FORM</h1>
+
+    <div align="center">
+      <!-- BASIC DETAILS FORM -->
+      <form id="basicDetailsForm">
+        <fieldset>
+          <legend>Basic Details</legend>
+          <table>
+            <tr>
+              <th>Firstname:</th>
+              <td>
+                <input
+                  type="text"
+                  id="fname"
+                  pattern="[A-Za-z]{2,20}"
+                  required
+                  title="Firstname must contain only letters (2-20 characters)"
+                />
+              </td>
+
+              <th>Surname:</th>
+              <td>
+                <input
+                  type="text"
+                  id="surname"
+                  pattern="[A-Za-z]{2,20}"
+                  required
+                  title="Surname must contain only letters (2-20 characters)"
+                />
+              </td>
+
+              <th>Lastname:</th>
+              <td>
+                <input
+                  type="text"
+                  id="lname"
+                  pattern="[A-Za-z]{2,20}"
+                  required
+                  title="Lastname must contain only letters (2-20 characters)"
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <th>Email:</th>
+              <td>
+                <input
+                  type="email"
+                  id="email"
+                  required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                  title="Enter a valid email address (example: name@email.com)"
+                />
+              </td>
+
+              <th>DOB:</th>
+              <td>
+                <input
+                  type="date"
+                  id="dob"
+                  required
+                  title="Please select your date of birth"
+                />
+              </td>
+
+              <th>Gender:</th>
+              <td>
+                <select id="gender" required title="Please select gender">
+                  <option value="">Select</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </td>
+
+              <th>Relationship:</th>
+              <td>
+                <select
+                  id="r_status"
+                  required
+                  title="Please select relationship status"
+                >
+                  <option value="">Select</option>
+                  <option>Single</option>
+                  <option>Married</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <th>Address1:</th>
+              <td colspan="7">
+                <textarea
+                  id="add1"
+                  minlength="10"
+                  maxlength="100"
+                  required
+                  title="Address must be between 10 and 100 characters"
+                ></textarea>
+              </td>
+            </tr>
+
+            <tr>
+              <th>Address2:</th>
+              <td colspan="7">
+                <textarea
+                  id="add2"
+                  minlength="5"
+                  maxlength="100"
+                  title="Address must be between 5 and 100 characters"
+                ></textarea>
+              </td>
+            </tr>
+
+            <tr>
+              <th>City:</th>
+              <td>
+                <input
+                  type="text"
+                  id="city"
+                  required
+                  pattern="[A-Za-z ]{2,30}"
+                  title="City must contain only letters (2-30 characters)"
+                />
+              </td>
+
+              <th>State:</th>
+              <td>
+                <select id="state" required title="Please select a state">
+                  <option value="">Select State</option>
+                  <option>Gujarat</option>
+                  <option>Maharashtra</option>
+                  <option>Rajasthan</option>
+                </select>
+              </td>
+
+              <th>Zip:</th>
+              <td>
+                <input
+                  type="text"
+                  id="zip"
+                  required
+                  pattern="[0-9]{6}"
+                  title="Zip code must be 6 digits"
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="8" style="text-align: right">
+                <button type="button" onclick="saveBasicDetails()">Save</button>
+              </td>
+            </tr>
+          </table>
+        </fieldset>
+      </form>
+
+      <!-- EDUCATION DETAILS FORM -->
+      <form id="educationForm">
+        <fieldset>
+          <legend>Education Details</legend>
+          <table>
+            <!-- SSC -->
+            <tr>
+              <th colspan="8">SSC</th>
+            </tr>
+            <tr>
+              <th>Percentage(%):</th>
+              <td>
+                <input type="number" min="34" max="100" id="ssc_per" required />
+              </td>
+
+              <th>School:</th>
+              <td>
+                <input
+                  type="text"
+                  id="ssc_school"
+                  pattern="[A-Za-z. ]{3,50}"
+                  title="Enter a valid school name"
+                  required
+                />
+              </td>
+
+              <th>Year:</th>
+              <td>
+                <input
+                  type="text"
+                  id="ssc_year"
+                  pattern="^(19|20)\d{2}$"
+                  title="Enter valid 4 digit year"
+                  required
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="8"><hr /></td>
+            </tr>
+
+            <!-- HSC -->
+            <tr>
+              <th colspan="8">HSC</th>
+            </tr>
+            <tr>
+              <th>Percentage(%):</th>
+              <td>
+                <input type="number" min="34" max="100" id="hsc_per" required />
+              </td>
+
+              <th>School:</th>
+              <td>
+                <input
+                  type="text"
+                  id="hsc_school"
+                  pattern="[A-Za-z. ]{3,50}"
+                  title="Enter a valid school name"
+                  required
+                />
+              </td>
+
+              <th>Year:</th>
+              <td>
+                <input
+                  type="text"
+                  id="hsc_year"
+                  pattern="^(19|20)\d{2}$"
+                  title="Enter valid 4 digit year"
+                  required
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="8"><hr /></td>
+            </tr>
+
+            <!-- Bachelors -->
+            <tr>
+              <th colspan="8">Bachelors</th>
+            </tr>
+            <tr>
+              <th>Degree:</th>
+              <td>
+                <input
+                  type="text"
+                  id="bechelors_degree"
+                  pattern="[A-Za-z ]{2,40}"
+                  title="Enter valid degree name"
+                  required
+                />
+              </td>
+
+              <th>Percentage(%):</th>
+              <td>
+                <input
+                  type="number"
+                  min="34"
+                  max="100"
+                  id="bechelors_per"
+                  required
+                />
+              </td>
+
+              <th>University:</th>
+              <td>
+                <input
+                  type="text"
+                  id="bechelors_uni"
+                  pattern="[A-Za-z. ]{3,60}"
+                  title="Enter valid university name"
+                  required
+                />
+              </td>
+
+              <th>Year:</th>
+              <td>
+                <input
+                  type="text"
+                  id="bechelors_year"
+                  pattern="^(19|20)\d{2}$"
+                  title="Enter valid 4 digit year"
+                  required
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="8"><hr /></td>
+            </tr>
+
+            <!-- Masters -->
+            <tr>
+              <th colspan="8">Masters</th>
+            </tr>
+            <tr>
+              <th>Degree:</th>
+              <td>
+                <input
+                  type="text"
+                  id="masters_degree"
+                  pattern="[A-Za-z ]{2,40}"
+                  title="Enter valid degree name"
+                />
+              </td>
+
+              <th>Percentage(%):</th>
+              <td>
+                <input type="number" min="34" max="100" id="masters_per" />
+              </td>
+
+              <th>University:</th>
+              <td>
+                <input
+                  type="text"
+                  id="masters_uni"
+                  pattern="[A-Za-z. ]{3,60}"
+                  title="Enter valid university name"
+                />
+              </td>
+
+              <th>Year:</th>
+              <td>
+                <input
+                  type="text"
+                  id="masters_year"
+                  pattern="^(19|20)\d{2}$"
+                  title="Enter valid 4 digit year"
+                />
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="8" style="text-align: right">
+                <button
+                  type="submit"
+                  onclick="saveEducationDetails(event)"
+                >Save</button>
+              </td>
+            </tr>
+          </table>
+        </fieldset>
+      </form>
+      <!-- WORK EXPERIENCE FORM -->
+      <form id="workForm">
+        <fieldset>
+          <legend>Work Experience</legend>
+          <table style="width: 70%" border="1" id="experienceTable">
+            <thead>
+              <tr>
+                <th>Company Name</th>
+                <th>Role</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input
+                    type="text"
+                    class="company"
+                    required
+                    maxlength="50"
+                    pattern="[A-Za-z0-9.& ]{2,50}"
+                    title="Company name should be 2-50 characters"
+                  />
+                </td>
+
+                <td>
+                  <input
+                    type="text"
+                    class="role"
+                    required
+                    maxlength="40"
+                    pattern="[A-Za-z ]{2,40}"
+                    title="Role should contain only letters"
+                  />
+                </td>
+
+                <td>
+                  <input type="date" class="from" required />
+                </td>
+
+                <td>
+                  <input type="date" class="to" required />
+                </td>
+
+                <td style="text-align: center">
+                  <button type="button" onclick="removeWorkRow()">⛔</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+          <input type="button" onclick="addWorkRow(this)" value="Add row +" />
+          <button type="submit" onclick="saveExperience()">Save</button>
+        </fieldset>
+      </form>
+
+      <!-- LANGUAGES FORM -->
+      <form id="languageForm">
+        <fieldset>
+          <legend>Languages Known</legend>
+          <table id="languageTable">
+            <thead>
+              <tr>
+                <th>Language Name</th>
+                <th>Read</th>
+                <th>Write</th>
+                <th>Speak</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <button type="submit" onclick="saveLanguages()" >Save</button>
+        </fieldset>
+      </form>
+
+      <!-- TECHNOLOGIES FORM -->
+      <form id="technologyForm">
+        <fieldset>
+          <legend>Technologies</legend>
+          <table id="technologyTable">
+            <thead>
+              <tr>
+                <th>Technology Name</th>
+                <th>Beginner</th>
+                <th>Intermediate</th>
+                <th>Expert</th>
+              </tr>
+            </thead>
+            <tbody id="tech_body"></tbody>
+          </table>
+          <input
+            type="text"
+            name="add_tech"
+            id="add_tech"
+            placeholder="Add technology"
+          />
+          <input type="button" value="ADD TECH" onclick="addTechnology()" />
+          <button type="submit" onclick="saveTechnologies()" >Save</button>
+        </fieldset>
+      </form>
+
+      <!-- REFERENCE -->
+      <form id="referanceForm">
+        <fieldset>
+          <legend>Referance Details</legend>
+
+          <table>
+            <!-- Reference 1 -->
+            <tr>
+              <th><label for="refName1">Name:</label></th>
+              <td>
+                <input
+                  type="text"
+                  id="refName1"
+                  required
+                  maxlength="40"
+                  pattern="[A-Za-z ]{2,40}"
+                  title="Name should contain only letters (2-40 characters)"
+                />
+              </td>
+
+              <th><label for="refContact1">Contact No:</label></th>
+              <td>
+                <input
+                  type="tel"
+                  id="refContact1"
+                  required
+                  pattern="[6-9][0-9]{9}"
+                  maxlength="10"
+                  title="Enter a valid 10 digit mobile number"
+                />
+              </td>
+
+              <th><label for="refRelation1">Relation:</label></th>
+              <td>
+                <select id="refRelation1" required>
+                  <option value="" disabled selected>Select Relation</option>
+                  <option>Manager</option>
+                  <option>Team Leader</option>
+                  <option>Supervisor</option>
+                  <option>Colleague</option>
+                  <option>Friend</option>
+                  <option>Teacher</option>
+                  <option>Professor</option>
+                  <option>Mentor</option>
+                  <option>Client</option>
+                  <option>Relative</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="8"><hr /></td>
+            </tr>
+
+            <!-- Reference 2 -->
+            <tr>
+              <th><label for="refName2">Name:</label></th>
+              <td>
+                <input
+                  type="text"
+                  id="refName2"
+                  required
+                  maxlength="40"
+                  pattern="[A-Za-z ]{2,40}"
+                  title="Name should contain only letters (2-40 characters)"
+                />
+              </td>
+
+              <th><label for="refContact2">Contact No:</label></th>
+              <td>
+                <input
+                  type="tel"
+                  id="refContact2"
+                  required
+                  pattern="[6-9][0-9]{9}"
+                  maxlength="10"
+                  title="Enter a valid 10 digit mobile number"
+                />
+              </td>
+
+              <th><label for="refRelation2">Relation:</label></th>
+              <td>
+                <select id="refRelation2" required>
+                  <option value="" disabled selected>Select Relation</option>
+                  <option>Manager</option>
+                  <option>Team Leader</option>
+                  <option>Supervisor</option>
+                  <option>Colleague</option>
+                  <option>Friend</option>
+                  <option>Teacher</option>
+                  <option>Professor</option>
+                  <option>Mentor</option>
+                  <option>Client</option>
+                  <option>Relative</option>
+                </select>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="8"><hr /></td>
+            </tr>
+          </table>
+          <button type="submit" onclick="saveReferance()">Save</button>
+        </fieldset>
+      </form>
+    </div>
+  </body>
+  <script>
+    function saveBasicDetails() {
+      //   e.preventDefault();
+
+      // Browser validation
+      let form = document.getElementById("basicDetailsForm");
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      let fname = document.getElementById("fname").value;
+      let surname = document.getElementById("surname").value;
+      let lname = document.getElementById("lname").value;
+      let email = document.getElementById("email").value;
+      let dob = document.getElementById("dob").value;
+      let gender = document.getElementById("gender").value;
+      let relationshipStatus = document.getElementById("r_status").value;
+      let city = document.getElementById("city").value;
+      let state = document.getElementById("state").value;
+      let address1 = document.getElementById("add1").value;
+      let address2 = document.getElementById("add2").value;
+      let zip = document.getElementById("zip").value;
+
+      alert(
+        "Saved Details:\n\n" +
+          "Name: " +
+          fname +
+          " " +
+          surname +
+          " " +
+          lname +
+          "\n" +
+          "Email: " +
+          email +
+          "\n" +
+          "DOB: " +
+          dob +
+          "\n" +
+          "Gender: " +
+          gender +
+          "\n" +
+          "Relationship Status: " +
+          relationshipStatus +
+          "\n\n" +
+          "Address1: " +
+          address1 +
+          "\n" +
+          "Address2: " +
+          address2 +
+          "\n" +
+          "City: " +
+          city +
+          "\n" +
+          "State: " +
+          state +
+          "\n" +
+          "ZIP Code: " +
+          zip,
+      );
+    }
+
+    function saveEducationDetails(e) {
+      let form = document.getElementById("educationForm");
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      let sscPer = document.getElementById("ssc_per").value;
+      let sscSchool = document.getElementById("ssc_school").value;
+      let sscYear = document.getElementById("ssc_year").value;
+
+      let hscPer = document.getElementById("hsc_per").value;
+      let hscSchool = document.getElementById("hsc_school").value;
+      let hscYear = document.getElementById("hsc_year").value;
+
+      let bDegree = document.getElementById("bechelors_degree").value;
+      let bPer = document.getElementById("bechelors_per").value;
+      let bUni = document.getElementById("bechelors_uni").value;
+      let bYear = document.getElementById("bechelors_year").value;
+
+      let mDegree = document.getElementById("masters_degree").value;
+      let mPer = document.getElementById("masters_per").value;
+      let mUni = document.getElementById("masters_uni").value;
+      let mYear = document.getElementById("masters_year").value;
+
+      alert(
+        "Education Details:\n\n" +
+          "---- SSC ----\n" +
+          "Percentage: " +
+          sscPer +
+          "%\n" +
+          "School: " +
+          sscSchool +
+          "\n" +
+          "Year: " +
+          sscYear +
+          "\n\n" +
+          "---- HSC ----\n" +
+          "Percentage: " +
+          hscPer +
+          "%\n" +
+          "School: " +
+          hscSchool +
+          "\n" +
+          "Year: " +
+          hscYear +
+          "\n\n" +
+          "---- Bachelors ----\n" +
+          "Degree: " +
+          bDegree +
+          "\n" +
+          "Percentage: " +
+          bPer +
+          "%\n" +
+          "University: " +
+          bUni +
+          "\n" +
+          "Year: " +
+          bYear +
+          "\n\n" +
+          "---- Masters ----\n" +
+          "Degree: " +
+          mDegree +
+          "\n" +
+          "Percentage: " +
+          mPer +
+          "%\n" +
+          "University: " +
+          mUni +
+          "\n" +
+          "Year: " +
+          mYear,
+      );
+    }
+
+    function addWorkRow() {
+      let tableBody = document.querySelector("#experienceTable tbody");
+
+      let newRow = document.createElement("tr");
+
+      newRow.innerHTML = `
+    <td>
+      <input 
+        type="text" 
+        class="company"
+        required
+        maxlength="50"
+        pattern="[A-Za-z0-9.& ]{2,50}"
+        title="Company name should be 2-50 characters"
+      >
+    </td>
+
+    <td>
+      <input 
+        type="text" 
+        class="role"
+        required
+        maxlength="40"
+        pattern="[A-Za-z ]{2,40}"
+        title="Role should contain only letters"
+      >
+    </td>
+
+    <td>
+      <input 
+        type="date" 
+        class="from"
+        required
+     
+      >
+    </td>
+
+    <td>
+      <input 
+        type="date" 
+        class="to"
+        required
+       
+      >
+    </td>
+
+    <td style="text-align:center;">
+      <button type="button" onclick="removeWorkRow(this)">⛔</button>
+    </td>
+  `;
+
+      tableBody.appendChild(newRow);
+    }
+    function saveExperience() {
+      let form = document.getElementById("workForm");
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      let companies = document.querySelectorAll(".company");
+      let roles = document.querySelectorAll(".role");
+      let fromDates = document.querySelectorAll(".from");
+      let toDates = document.querySelectorAll(".to");
+
+      for (let i = 0; i < companies.length; i++) {
+        alert(
+          "Work experience:" +
+            (i + 1) +
+            "\n" +
+            "Company: " +
+            companies[i].value +
+            "\n" +
+            "Role: " +
+            roles[i].value +
+            "\n" +
+            "From: " +
+            fromDates[i].value +
+            "\n" +
+            "To: " +
+            toDates[i].value,
+        );
+      }
+    }
+
+    function removeWorkRow(button) {
+      let row = button.parentNode.parentNode;
+      row.remove();
+    }
+
+    function generateLanguages() {
+      let languageTable = document.querySelector("#languageTable tbody");
+      let languages = ["Hindi", "English", "Gujarati", "Marathi"];
+
+      for (let i = 0; i < languages.length; i++) {
+        let newRow = document.createElement("tr");
+
+        newRow.innerHTML = `
+      <td class="lang-name">${languages[i]}</td>
+      <td><input type="checkbox" class="read"></td>
+      <td><input type="checkbox" class="write"></td>
+      <td><input type="checkbox" class="speak"></td>
+    `;
+
+        languageTable.appendChild(newRow);
+      }
+    }
+    generateLanguages();
+
+    function saveLanguages() {
+      let rows = document.querySelectorAll("#languageTable tbody tr");
+
+      let result = "";
+
+      rows.forEach(function (row) {
+        let language = row.querySelector(".lang-name").innerText;
+        let canRead = row.querySelector(".read").checked;
+        let canWrite = row.querySelector(".write").checked;
+        let canSpeak = row.querySelector(".speak").checked;
+
+        result += "Language: " + language + "\n";
+        result += "Read: " + (canRead ? "Yes" : "No") + "\n";
+        result += "Write: " + (canWrite ? "Yes" : "No") + "\n";
+        result += "Speak: " + (canSpeak ? "Yes" : "No") + "\n\n";
+      });
+
+      alert(result);
+    }
+
+    let technologies = ["JAVA", "NODE", "PHP", "C++"];
+
+    function addTechnology() {
+      let addTech = document.getElementById("add_tech").value;
+      technologies.push(addTech);
+      generateTechnologies();
+    }
+
+    function generateTechnologies() {
+      let techBody = document.getElementById("tech_body");
+      techBody.innerHTML = "";
+
+      let technologyTable = document.querySelector("#technologyTable tbody");
+      //    technologies = ["JAVA", "NODE", "PHP", "C++"];
+
+      for (let i = 0; i < technologies.length; i++) {
+        let newRow = document.createElement("tr");
+
+        newRow.innerHTML = `
+      <td class="tech-name">${technologies[i]}</td>
+      <td><input type="radio" name="${technologies[i]}" class="beginner"></td>
+      <td><input type="radio" name="${technologies[i]}" class="intermediate"></td>
+      <td><input type="radio" name="${technologies[i]}" class="expert"></td>
+    `;
+
+        technologyTable.appendChild(newRow);
+      }
+    }
+    generateTechnologies();
+
+    function saveTechnologies() {
+      let technologiesRow = document.querySelectorAll(
+        "#technologyTable tbody tr",
+      );
+      let technologyResult = "";
+
+      technologiesRow.forEach((row) => {
+        let technologyName = row.querySelector(".tech-name").innerText;
+        let beginner = row.querySelector(".beginner").checked;
+        let intermediate = row.querySelector(".intermediate").checked;
+        let expert = row.querySelector(".expert").checked;
+
+        technologyResult += "Technology:" + technologyName + "\n";
+        technologyResult += "Beginner:" + (beginner ? "Yes" : "No") + "\n";
+        technologyResult +=
+          "intermediate: " + (intermediate ? "Yes" : "No") + "\n";
+        technologyResult += "expert: " + (expert ? "Yes" : "No") + "\n\n";
+      });
+      alert(technologyResult);
+    }
+
+    function saveReferance() {
+      let form = document.getElementById("referanceForm");
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      let name1 = document.getElementById("refName1").value;
+      let contact1 = document.getElementById("refContact1").value;
+      let relation1 = document.getElementById("refRelation1").value;
+
+      let name2 = document.getElementById("refName2").value;
+      let contact2 = document.getElementById("refContact2").value;
+      let relation2 = document.getElementById("refRelation2").value;
+
+      alert(
+        "Reference 1\n" +
+          "Name: " +
+          name1 +
+          "\nContact: " +
+          contact1 +
+          "\nRelation: " +
+          relation1 +
+          "\n\nReference 2\n" +
+          "Name: " +
+          name2 +
+          "\nContact: " +
+          contact2 +
+          "\nRelation: " +
+          relation2,
+      );
+    }
+  </script>
+</html>
