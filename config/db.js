@@ -18,6 +18,8 @@ const checkDBConnection = async () => {
   try {
     const connection = await db.getConnection();
     console.log(`MySQL Connected to DB: ${process.env.DB_NAME}`);
+     connection.release()
+
   } catch (err) {
     console.error("DB connection failed", err);
   }

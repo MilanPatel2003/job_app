@@ -1,5 +1,7 @@
-const getData = async (req,res) => {
-    
-}
+import db from "../config/db.js";
 
-export default getData
+const getData = async (req, res) => {
+ 
+};
+
+export default getData;

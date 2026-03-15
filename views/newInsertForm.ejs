@@ -1,351 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Job Application</title>
 
-<style>
-body{font-family:Arial;margin:40px}
-fieldset{margin-bottom:30px;padding:20px}
-table{width:100%}
-input,select{height:28px;width:200px}
-textarea{width:100%;height:60px}
-button{padding:6px 10px}
-</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Job Application</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px
+        }
+
+        fieldset {
+            margin-bottom: 30px;
+            padding: 20px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        input,
+        select {
+            height: 28px;
+            width: 200px
+        }
+
+        textarea {
+            width: 100%;
+            height: 60px
+        }
+
+        button {
+            padding: 6px 10px
+        }
+    </style>
 
 </head>
 
 <body>
 
-<h1 align="center">JOB APPLICATION FORM</h1>
-
-<form method="POST" action="/applicants">
-
-<!-- BASIC DETAILS -->
-<fieldset>
-<legend>Basic Details</legend>
-
-<table>
-
-<tr>
-<td>First Name</td>
-<td><input type="text" name="first_name" required></td>
-
-<td>Middle Name</td>
-<td><input type="text" name="middle_name"></td>
-
-<td>Surname</td>
-<td><input type="text" name="surname" required></td>
-</tr>
-
-<tr>
-<td>Email</td>
-<td><input type="email" name="email" required></td>
-
-<td>Phone</td>
-<td><input type="text" name="phone_number" required></td>
-
-<td>Date of Birth</td>
-<td><input type="date" name="date_of_birth" required></td>
-</tr>
-
-<tr>
-<td>Gender</td>
-<td>
-<select name="gender_id">
-<% genders.forEach(g=>{ %>
-<option value="<%= g.gender_id %>"><%= g.gender_name %></option>
-<% }) %>
-</select>
-</td>
-
-<td>Marital Status</td>
-<td>
-<select name="marital_status_id">
-<% maritalStatuses.forEach(m=>{ %>
-<option value="<%= m.marital_status_id %>"><%= m.marital_status_name %></option>
-<% }) %>
-</select>
-</td>
-
-<td>Country</td>
-<td><input type="text" name="country" value="India"></td>
-</tr>
-
-<tr>
-<td>Address Line 1</td>
-<td colspan="5">
-<textarea name="address_line1"></textarea>
-</td>
-</tr>
-
-<tr>
-<td>Address Line 2</td>
-<td colspan="5">
-<textarea name="address_line2"></textarea>
-</td>
-</tr>
-
-<tr>
-<td>City</td>
-<td><input type="text" name="city"></td>
-
-<td>State</td>
-<td><input type="text" name="state"></td>
-
-<td>Postal Code</td>
-<td><input type="text" name="postal_code"></td>
-</tr>
-
-<tr>
-<td>Current Designation</td>
-<td><input type="text" name="current_designation"></td>
-
-<td>Total Experience (Years)</td>
-<td><input type="number" step="0.1" name="total_experience_years"></td>
-</tr>
-
-</table>
-</fieldset>
-
-
-<!-- EDUCATION -->
-<fieldset>
-<legend>Education Details</legend>
-
-<table>
-
-<tr>
-<th>Course</th>
-<th>Institute</th>
-<th>Board/University</th>
-<th>Year</th>
-<th>Percentage</th>
-</tr>
+    <h1 align="center">JOB APPLICATION FORM</h1>
 
-<tr>
-<td>
-<select name="edu_course_1">
-<% courseTypes.forEach(c=>{ %>
-<option value="<%= c.course_type_id %>"><%= c.course_type_name %></option>
-<% }) %>
-</select>
-</td>
+    <form method="POST" action="/add">
 
-<td><input type="text" name="edu_institute_1"></td>
-<td><input type="text" name="edu_board_1"></td>
-<td><input type="text" name="edu_year_1"></td>
-<td><input type="number" name="edu_percentage_1"></td>
-</tr>
+        <!-- BASIC DETAILS -->
+        <fieldset>
+            <legend>Basic Details</legend>
 
-<tr>
-<td>
-<select name="edu_course_2">
-<% courseTypes.forEach(c=>{ %>
-<option value="<%= c.course_type_id %>"><%= c.course_type_name %></option>
-<% }) %>
-</select>
-</td>
+            <table>
 
-<td><input type="text" name="edu_institute_2"></td>
-<td><input type="text" name="edu_board_2"></td>
-<td><input type="text" name="edu_year_2"></td>
-<td><input type="number" name="edu_percentage_2"></td>
-</tr>
+                <tr>
+                    <td>First Name</td>
+                    <td><input type="text" name="first_name" required></td>
 
-</table>
-</fieldset>
+                    <td>Middle Name</td>
+                    <td><input type="text" name="middle_name"></td>
 
+                    <td>Surname</td>
+                    <td><input type="text" name="surname" required></td>
+                </tr>
 
-<!-- WORK EXPERIENCE -->
-<fieldset>
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="email" required></td>
 
-<legend>Work Experience</legend>
+                    <td>Phone</td>
+                    <td><input type="text" name="phone_number" required></td>
 
-<table border="1" id="workTable">
+                    <td>Date of Birth</td>
+                    <td><input type="date" name="date_of_birth" required></td>
+                </tr>
 
-<thead>
-<tr>
-<th>Company</th>
-<th>Designation</th>
-<th>From</th>
-<th>To</th>
-<th>Action</th>
-</tr>
-</thead>
+                <tr>
 
-<tbody>
+                    <td>Gender</td>
+                    <td>
+                        <select name="gender_id">
+                            <% genders.forEach(g=>{ %>
+                                <option value="<%= g.gender_id %>">
+                                    <%= g.gender_name %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </td>
 
-<tr>
-<td><input type="text" name="company_name_1"></td>
-<td><input type="text" name="designation_1"></td>
-<td><input type="date" name="start_date_1"></td>
-<td><input type="date" name="end_date_1"></td>
+                    <td>Marital Status</td>
+                    <td>
+                        <select name="marital_status_id">
+                            <% maritalStatuses.forEach(m=>{ %>
+                                <option value="<%= m.marital_status_id %>">
+                                    <%= m.marital_status_name %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </td>
 
-<td>
-<button type="button" onclick="removeWork(this)">Remove</button>
-</td>
-</tr>
+                    <td>Country</td>
+                    <td><input type="text" name="country" value="India"></td>
 
-</tbody>
-</table>
+                </tr>
 
-<br>
+                <tr>
+                    <td>Address Line 1</td>
+                    <td colspan="5"><textarea name="address_line1"></textarea></td>
+                </tr>
+
+                <tr>
+                    <td>Address Line 2</td>
+                    <td colspan="5"><textarea name="address_line2"></textarea></td>
+                </tr>
 
-<button type="button" onclick="addWork()">Add Work</button>
+                <tr>
 
-</fieldset>
+                    <td>City</td>
+                    <td><input type="text" name="city"></td>
 
+                    <td>State</td>
+                    <td><input type="text" name="state"></td>
+
+                    <td>Postal Code</td>
+                    <td><input type="text" name="postal_code"></td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Current Designation</td>
+                    <td><input type="text" name="current_designation"></td>
 
-<!-- LANGUAGES -->
-<fieldset>
+                    <td>Total Experience</td>
+                    <td><input type="number" step="0.1" name="total_experience_years"></td>
 
-<legend>Languages Known</legend>
+                </tr>
 
-<table border="1">
+            </table>
+        </fieldset>
 
-<tr>
-<th>Language</th>
-<th>Read</th>
-<th>Write</th>
-<th>Speak</th>
-</tr>
+        <!-- EDUCATION -->
+        <fieldset>
+            <legend>Education Details</legend>
 
-<% languages.forEach(l=>{ %>
+            <table>
 
-<tr>
+                <tr>
+                    <th>Course</th>
+                    <th>Board/University</th>
+                    <th>Year</th>
+                    <th>Percentage</th>
+                </tr>
+
+                <tr>
 
-<td><%= l.language_name %></td>
+                    <td>
+                        <select name="education[0][course_type_id]">
+                            <% courseTypes.forEach(c=>{ %>
+                                <% if (c.course_type_name==='SSC' ) { %>
+                                    <option value="<%= c.course_type_id %>">
+                                        <%= c.course_type_name %>
+                                    </option>
+                                    <% }}) %>
+                        </select>
+                    </td>
 
-<td><input type="checkbox" name="lang_<%= l.language_id %>_read"></td>
-<td><input type="checkbox" name="lang_<%= l.language_id %>_write"></td>
-<td><input type="checkbox" name="lang_<%= l.language_id %>_speak"></td>
+                    <td><input type="text" name="education[0][board_or_uni]"></td>
+                    <td><input type="text" name="education[0][year]"></td>
+                    <td><input type="number" name="education[0][percentage]"></td>
 
-</tr>
+                </tr>
 
-<% }) %>
+                <tr>
 
-</table>
+                    <td>
+                        <select name="education[1][course_type_id]">
+                            <% courseTypes.forEach(c=>{ %>
+                                <% if (c.course_type_name==='HSC' ) { %>
+                                    <option value="<%= c.course_type_id %>">
+                                        <%= c.course_type_name %>
+                                    </option>
+                                    <% }}) %>
+                        </select>
+                    </td>
 
-</fieldset>
+                    <td><input type="text" name="education[1][board_or_uni]"></td>
+                    <td><input type="text" name="education[1][year]"></td>
+                    <td><input type="number" name="education[1][percentage]"></td>
 
+                </tr>
 
-<!-- TECHNOLOGIES -->
-<fieldset>
 
-<legend>Technologies</legend>
+                <tr>
 
-<table border="1" id="techTable">
+                    <td>
+                        <select name="education[2][course_type_id]">
+                            <% courseTypes.forEach(c=>{ %>
+                                <% if(!(c.course_type_name==='SSC' || c.course_type_name==='HSC' )) {%>
+                                    <option value="<%= c.course_type_id %>">
+                                        <%= c.course_type_name %>
+                                    </option>
+                                    <% }}) %>
+                        </select>
+                    </td>
 
-<thead>
+                    <td><input type="text" name="education[2][board_or_uni]"></td>
+                    <td><input type="text" name="education[2][year]"></td>
+                    <td><input type="number" name="education[2][percentage]"></td>
 
-<tr>
-<th>Technology</th>
-<th>Beginner</th>
-<th>Intermediate</th>
-<th>Expert</th>
-</tr>
+                </tr>
 
-</thead>
+                <tr>
 
-<tbody id="techBody"></tbody>
+                    <td>
+                        <select name="education[3][course_type_id]">
+                            <% courseTypes.forEach(c=>{ %>
+                                <% if(!(c.course_type_name==='SSC' || c.course_type_name==='HSC' )) {%>
+                                    <option value="<%= c.course_type_id %>">
+                                        <%= c.course_type_name %>
+                                    </option>
+                                    <% }}) %>
+                        </select>
+                    </td>
 
-</table>
+                    <td><input type="text" name="education[3][board_or_uni]"></td>
+                    <td><input type="text" name="education[3][year]"></td>
+                    <td><input type="number" name="education[3][percentage]"></td>
 
-<br>
+                </tr>
 
-<input type="text" id="techInput" placeholder="Add Technology">
 
-<button type="button" onclick="addTechnology()">Add Tech</button>
+            </table>
+        </fieldset>
 
-</fieldset>
 
+        <!-- WORK EXPERIENCE -->
+        <fieldset>
 
-<!-- REFERENCES -->
-<fieldset>
+            <legend>Work Experience</legend>
 
-<legend>References</legend>
+            <table border="1" id="workTable">
 
-<table>
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Designation</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-<tr>
-<th>Name</th>
-<th>Company</th>
-<th>Designation</th>
-<th>Phone</th>
-<th>Email</th>
-<th>Relation</th>
-</tr>
+                <tbody>
 
-<tr>
+                    <tr>
 
-<td><input type="text" name="reference_name_1"></td>
-<td><input type="text" name="reference_company_1"></td>
-<td><input type="text" name="reference_designation_1"></td>
-<td><input type="text" name="reference_phone_1"></td>
-<td><input type="email" name="reference_email_1"></td>
+                        <td><input type="text" name="work[0][company_name]"></td>
+                        <td><input type="text" name="work[0][designation]"></td>
+                        <td><input type="date" name="work[0][start_date]"></td>
+                        <td><input type="date" name="work[0][end_date]"></td>
 
-<td>
-<select name="reference_relation_1">
-<% referenceRelationships.forEach(r=>{ %>
-<option value="<%= r.reference_relationship_id %>"><%= r.relationship_name %></option>
-<% }) %>
-</select>
-</td>
+                        <td>
+                            <button type="button" onclick="removeWork(this)">Remove</button>
+                        </td>
 
-</tr>
+                    </tr>
 
-<tr>
+                </tbody>
 
-<td><input type="text" name="reference_name_2"></td>
-<td><input type="text" name="reference_company_2"></td>
-<td><input type="text" name="reference_designation_2"></td>
-<td><input type="text" name="reference_phone_2"></td>
-<td><input type="email" name="reference_email_2"></td>
+            </table>
 
-<td>
-<select name="reference_relation_2">
-<% referenceRelationships.forEach(r=>{ %>
-<option value="<%= r.reference_relationship_id %>"><%= r.relationship_name %></option>
-<% }) %>
-</select>
-</td>
+            <br>
 
-</tr>
+            <button type="button" onclick="addWork()">Add Work</button>
 
-</table>
+        </fieldset>
 
-</fieldset>
 
+        <!-- LANGUAGES -->
+        <fieldset>
 
-<br>
+            <legend>Languages Known</legend>
 
-<button type="submit">Submit Application</button>
+            <table border="1">
 
-</form>
+                <tr>
+                    <th>Language</th>
+                    <th>Read</th>
+                    <th>Write</th>
+                    <th>Speak</th>
+                </tr>
 
+                <% languages.forEach((l,i)=>{ %>
 
-<script>
+                    <tr>
 
-let workIndex=1
+                        <td>
+                            <%= l.language_name %>
 
-function addWork(){
+                                <input type="hidden" name="languages[<%= i %>][language_id]"
+                                    value="<%= l.language_id %>">
 
-workIndex++
+                        </td>
 
-let tbody=document.querySelector("#workTable tbody")
+                        <td>
+                            <input type="checkbox" name="languages[<%= i %>][read]" value="1">
+                        </td>
 
-let row=document.createElement("tr")
+                        <td>
+                            <input type="checkbox" name="languages[<%= i %>][write]" value="1">
+                        </td>
 
-row.innerHTML=`
+                        <td>
+                            <input type="checkbox" name="languages[<%= i %>][speak]" value="1">
+                        </td>
 
-<td><input type="text" name="company_name_${workIndex}"></td>
+                    </tr>
 
-<td><input type="text" name="designation_${workIndex}"></td>
+                    <% }) %>
 
-<td><input type="date" name="start_date_${workIndex}"></td>
+            </table>
 
-<td><input type="date" name="end_date_${workIndex}"></td>
+        </fieldset>
+
+
+        <!-- TECHNOLOGIES -->
+        <!-- <fieldset>
+
+            <legend>Technologies</legend>
+
+            <table border="1">
+
+                <tr>
+                    <th>Technology</th>
+
+                    <% proficiencyLevels.forEach(p=>{ %>
+                        <th>
+                            <%= p.proficiency_level_name %>
+                        </th>
+                        <% }) %>
+
+                </tr>
+
+                <% technologies.forEach((t,i)=>{ %>
+
+                    <tr>
+
+                        <td>
+                            <%= t.technology_name %>
+                                <input type="hidden" name="technologies[<%= i %>][technology_id]"
+                                    value="<%= t.technology_id %>">
+                        </td>
+
+                        <% proficiencyLevels.forEach(p=>{ %>
+
+                            <td>
+                                <input type="radio" name="technologies[<%= i %>][proficiency_level_id]"
+                                    value="<%= p.proficiency_level_id %>">
+                            </td>
+
+                            <% }) %>
+
+                    </tr>
+
+                    <% }) %>
+
+            </table>
+
+        </fieldset> -->
+
+
+        <fieldset>
+
+            <legend>Technologies</legend>
+
+            <table id="techtable" border="1">
+
+                <tr>
+                    <th>Technology</th>
+
+                    <% proficiencyLevels.forEach(p=>{ %>
+                        <th>
+                            <%= p.proficiency_level_name %>
+                        </th>
+                        <% }) %>
+
+                </tr>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select name="technologies[0][technology_id]">
+                                <% technologies.forEach(t=>{ %>
+                                    <option value="<%= t.technology_id %>">
+                                        <%= t.technology_name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </td>
+                        <% proficiencyLevels.forEach(p=>{ %>
+                            <td><input type="radio" name="technologies[0][proficiency_level_id]"
+                                    value="<%= p.proficiency_level_id %>"></td>
+                            <% }) %>
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+
+            <button type="button" onclick="addTech()">Add Technology</button>
+        </fieldset>
+
+
+        <!-- REFERENCES -->
+        <fieldset>
+
+            <legend>References</legend>
+
+            <table>
+
+                <tr>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Designation</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Relation</th>
+                </tr>
+
+                <tr>
+
+                    <td><input type="text" name="references[0][name]"></td>
+                    <td><input type="text" name="references[0][company]"></td>
+                    <td><input type="text" name="references[0][designation]"></td>
+                    <td><input type="text" name="references[0][phone]"></td>
+                    <td><input type="email" name="references[0][email]"></td>
+
+                    <td>
+                        <select name="references[0][relationship_id]">
+                            <% referenceRelationships.forEach(r=>{ %>
+                                <option value="<%= r.reference_relationship_id %>">
+                                    <%= r.relationship_name %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td><input type="text" name="references[1][name]"></td>
+                    <td><input type="text" name="references[1][company]"></td>
+                    <td><input type="text" name="references[1][designation]"></td>
+                    <td><input type="text" name="references[1][phone]"></td>
+                    <td><input type="email" name="references[1][email]"></td>
+
+                    <td>
+                        <select name="references[1][relationship_id]">
+                            <% referenceRelationships.forEach(r=>{ %>
+                                <option value="<%= r.reference_relationship_id %>">
+                                    <%= r.relationship_name %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </td>
+
+                </tr>
+
+            </table>
+
+        </fieldset>
+
+
+        <br>
+
+        <button type="submit">Submit Application</button>
+
+    </form>
+
+
+    <script>
+
+        let workIndex = 0
+
+        function addWork() {
+
+            workIndex++
+
+            let tbody = document.querySelector("#workTable tbody")
+
+            let row = document.createElement("tr")
+
+            row.innerHTML = `
+
+<td><input type="text" name="work[${workIndex}][company_name]"></td>
+<td><input type="text" name="work[${workIndex}][designation]"></td>
+<td><input type="date" name="work[${workIndex}][start_date]"></td>
+<td><input type="date" name="work[${workIndex}][end_date]"></td>
 
 <td>
 <button type="button" onclick="removeWork(this)">Remove</button>
@@ -353,69 +502,44 @@ row.innerHTML=`
 
 `
 
-tbody.appendChild(row)
+            tbody.appendChild(row)
 
-}
+        }
 
-function removeWork(btn){
-btn.parentNode.parentNode.remove()
-}
+        function removeWork(btn) {
+            btn.parentNode.parentNode.remove()
+        }
+
+        let techIndex = 0
+        function addTech() {
+            techIndex++
+            console.log(techIndex);
 
 
+            let tbody = document.querySelector("#techtable tbody")
+            let row = document.createElement("tr")
+            row.innerHTML = `
+             
+                        <td>
+                            <select name="technologies[${techIndex}][technology_id]">
+                                <% technologies.forEach(t=>{ %>
+                                    <option value="<%= t.technology_id %>">
+                                        <%= t.technology_name %>
+                                    </option>
+                                    <% }) %>
+                            </select>
+                        </td>
+                        <% proficiencyLevels.forEach(p=>{ %>
+                            <td><input type="radio" name="technologies[${techIndex}][proficiency_level_id]"
+                                    value="<%= p.proficiency_level_id %>"></td>
+                            <% }) %>
+                
+            `
+            tbody.appendChild(row)
 
-let technologies=["Java","Node","PHP"]
-
-function addTechnology(){
-
-let val=document.getElementById("techInput").value
-
-if(val){
-technologies.push(val)
-generateTech()
-}
-
-}
-
-function generateTech(){
-
-let body=document.getElementById("techBody")
-
-body.innerHTML=""
-
-technologies.forEach((t,i)=>{
-
-let row=document.createElement("tr")
-
-row.innerHTML=`
-
-<td>
-${t}
-<input type="hidden" name="tech_${i}_name" value="${t}">
-</td>
-
-<td>
-<input type="radio" name="tech_${i}_level" value="1">
-</td>
-
-<td>
-<input type="radio" name="tech_${i}_level" value="2">
-</td>
-
-<td>
-<input type="radio" name="tech_${i}_level" value="3">
-</td>
-
-`
-
-body.appendChild(row)
-
-})
-
-}
-
-generateTech()
-
-</script>
+        }
+    </script>
 
 </body>
+
 </html>
