@@ -1,5 +1,5 @@
-create database job_application;
-use job_application;
+create database job_application2;
+use job_application2;
 
 -- =========================
 -- LOOKUP TABLES
@@ -68,8 +68,8 @@ CREATE TABLE applicants (
 
     address_line1 VARCHAR(255) NOT NULL,
     address_line2 VARCHAR(255),
-    city VARCHAR(100) NOT NULL,
-    state VARCHAR(100) NOT NULL,
+    city INT NOT NULL,
+    state INT NOT NULL,
     postal_code VARCHAR(20) NOT NULL,
     country VARCHAR(100) NOT NULL,
 
@@ -84,7 +84,6 @@ CREATE TABLE applicants (
     FOREIGN KEY (gender_id) REFERENCES genders(gender_id),
     FOREIGN KEY (marital_status_id) REFERENCES marital_statuses(marital_status_id)
 );
-
 
 -- =========================
 -- EDUCATION DETAILS
@@ -177,6 +176,8 @@ CREATE TABLE applicant_references (
     FOREIGN KEY (reference_relationship_id) REFERENCES reference_relationships(reference_relationship_id)
 );
 SET FOREIGN_KEY_CHECKS= 0 ;
+
+select * from applicants;
 
 
 
