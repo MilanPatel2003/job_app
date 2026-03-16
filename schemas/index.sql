@@ -1,5 +1,5 @@
--- create database job_application2;
--- use job_application2;
+create database job_application;
+use job_application;
 
 -- =========================
 -- LOOKUP TABLES
@@ -8,6 +8,18 @@
 CREATE TABLE genders (
     gender_id INT AUTO_INCREMENT PRIMARY KEY,
     gender_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE states(
+    state_id INT AUTO_INCREMENT PRIMARY KEY,
+    state_name VARCHAR(50) NOT NULL UNIQUE
+);
+
+CREATE TABLE cities(
+	city_id INT AUTO_INCREMENT PRIMARY KEY,
+    state_id INT,
+    city_name VARCHAR(50) NOT NULL UNIQUE,
+    FOREIGN KEY (state_id) REFERENCES states(state_id)
 );
 
 CREATE TABLE marital_statuses (
@@ -165,5 +177,6 @@ CREATE TABLE applicant_references (
     FOREIGN KEY (reference_relationship_id) REFERENCES reference_relationships(reference_relationship_id)
 );
 SET FOREIGN_KEY_CHECKS= 0 ;
+
 
 

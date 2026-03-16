@@ -5,6 +5,7 @@ import getMaritualStatus from "../controllers/getMaritualStatus.js"
 import getProficiencyLevels from "../controllers/getProficiencyLevels.js"
 import getReferenceRelationships from "../controllers/getReferenceRelationships.js"
 import getGender from "../controllers/getGender.js"
+import getCities from "../controllers/getCities.js"
 const router = express.Router()
 
 
@@ -17,7 +18,7 @@ router.get("/language", getLanguages)
 router.get("/maritualstatus", getMaritualStatus)
 router.get("/proficiency", getProficiencyLevels)
 router.get("/referencerelation", getReferenceRelationships)
-
+router.get("/city/:stateId", getCities); 
 
 
 

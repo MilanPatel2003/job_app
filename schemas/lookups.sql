@@ -6,6 +6,11 @@ INSERT INTO genders (gender_name) VALUES
 ('Female'),
 ('Other');
 
+
+-- =========================
+-- STATES
+-- =========================
+
 INSERT INTO states (state_name) VALUES
 ('Andhra Pradesh'),
 ('Arunachal Pradesh'),
@@ -35,6 +40,11 @@ INSERT INTO states (state_name) VALUES
 ('Uttar Pradesh'),
 ('Uttarakhand'),
 ('West Bengal');
+
+
+-- =========================
+-- CITIES
+-- =========================
 
 INSERT INTO cities (state_id, city_name)
 SELECT s.state_id, c.city_name

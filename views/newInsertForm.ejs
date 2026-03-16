@@ -114,11 +114,18 @@
 
                 <tr>
 
-                    <td>City</td>
-                    <td><input type="text" name="city"></td>
-
                     <td>State</td>
-                    <td><input type="text" name="state"></td>
+                    <td><select onchange="generateCities()" name="state">
+                            <% states.forEach(s=> { %>
+                                <option value="<%= s.state_id %>">
+                                    <%=s.state_name%>
+                                </option>
+                                <% }); %>
+                        </select></td>
+                    <td>city</td>
+                    <td><select name="city">
+
+                        </select></td>
 
                     <td>Postal Code</td>
                     <td><input type="text" name="postal_code"></td>
@@ -478,6 +485,24 @@
 
 
     <script>
+
+        async function generateCities() {
+            const stateId = document.getElementsByName("state")[0].value;
+            const citySelect = document.getElementsByName("city")[0];
+
+            // Fetch filtered cities from your server
+            const response = await fetch(`/combos/city/${stateId}`);
+            const cities = await response.json();
+
+            // Clear and repopulate the dropdown
+            citySelect.innerHTML = '<option value="">Select a city</option>';
+            cities.forEach(c => {
+                const option = document.createElement("option");
+                option.value = c.city_id;
+                option.textContent = c.city_name;
+                citySelect.appendChild(option);
+            });
+        }
 
         let workIndex = 0
 
