@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Applicant Details</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    height:100vh;
+}
+
+fieldset{
+    width:1200px;
+    margin:auto;
+}
+
+table{
+    border-collapse: collapse;
+    width:100%;
+}
+
+td,th{
+    border:1px solid #ccc;
+    padding:10px;
+}
+
+th{
+    background:#f4f4f4;
+    text-align:left;
+    width:250px;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<% basicDetails.forEach(b => { %>
+
+<fieldset>
+
+<legend>Basic Details</legend>
+
+<h1><%= b.first_name %> <%= b.middle_name %> <%= b.surname %></h1>
+
+<table>
+
+<tr>
+<th>First Name</th>
+<td><%= b.first_name %></td>
+</tr>
+
+<tr>
+<th>Middle Name</th>
+<td><%= b.middle_name %></td>
+</tr>
+
+<tr>
+<th>Surname</th>
+<td><%= b.surname %></td>
+</tr>
+
+<tr>
+<th>Gender</th>
+<td><%= b.gender_name %></td>
+</tr>
+
+<tr>
+<th>Date of Birth</th>
+<td><%= b.date_of_birth %></td>
+</tr>
+
+<tr>
+<th>Marital Status</th>
+<td><%= b.marital_status %></td>
+</tr>
+
+<tr>
+<th>Phone Number</th>
+<td><%= b.phone_number %></td>
+</tr>
+
+<tr>
+<th>Email</th>
+<td><%= b.email %></td>
+</tr>
+
+<tr>
+<th>Current Designation</th>
+<td><%= b.current_designation %></td>
+</tr>
+
+<tr>
+<th>Total Experience</th>
+<td><%= b.total_experience_years %> Years</td>
+</tr>
+
+<tr>
+<th>Address Line 1</th>
+<td><%= b.address_line1 %></td>
+</tr>
+
+<tr>
+<th>Address Line 2</th>
+<td><%= b.address_line2 %></td>
+</tr>
+
+<tr>
+<th>City</th>
+<td><%= b.city_name %></td>
+</tr>
+
+<tr>
+<th>State</th>
+<td><%= b.state_name %></td>
+</tr>
+
+<tr>
+<th>Postal Code</th>
+<td><%= b.postal_code %></td>
+</tr>
+
+<tr>
+<th>Country</th>
+<td><%= b.country %></td>
+</tr>
+
+<tr>
+<th>Created At</th>
+<td><%= b.created_at %></td>
+</tr>
+
+</table>
+
+</fieldset>
+
+<br><br>
+
+<% }) %>
+
+</body>
+</html>
