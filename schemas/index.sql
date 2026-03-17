@@ -1,5 +1,5 @@
-create database job_application2;
-use job_application2;
+create database job_application;
+use job_application;
 
 -- =========================
 -- LOOKUP TABLES
