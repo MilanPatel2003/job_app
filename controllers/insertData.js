@@ -107,7 +107,7 @@ VALUES (?,?,?,?,?)`,
           lang.speak ? 1 : 0,
         ],
       );
-    }
+    } 
 
     // TECHNOLOGIES
     for (const tech of req.body.technologies) {
