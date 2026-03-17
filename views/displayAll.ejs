@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APPLICANTS DATA</title>
+  </head>
+  <style>
+    h1 {
+      text-align: center;
+      color: 1f2937;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: white;
+    }
+
+    th {
+      background-color: #2f855a;
+      color: white;
+      padding: 10px;
+      text-align: left;
+    }
+
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    tbody tr:hover {
+      background-color: #f0fdf4;
+      transition: background-color 0.2s ease;
+    }
+  </style>
+  <body></body>
+</html>
+  <!-- {
+    applicant_id: 1,
+    first_name: 'Milan',
+    middle_name: 'B.',
+    surname: 'Patel',
+    gender_id: 2,
+    date_of_birth: 2003-10-21T18:30:00.000Z,
+    marital_status_id: 3,
+    address_line1: 'A/17, EVREGREEN SOCIETY, NR. KABIR ENCLAVE, BOPAL',
+    address_line2: 'A/17, EVREGREEN SOCIETY, NR. KABIR ENCLAVE, BOPAL',
+    city: 23,
+    state: 7,
+    postal_code: '380058',
+    country: 'India',
+    phone_number: '9157770634',
+    email: 'milan@gmail.com',
+    current_designation: 'Jr. full stack developer',
+    total_experience_years: '1.50',
+    created_at: 2026-03-17T05:34:36.000Z
+  } -->
+
+  <table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Current Designation</th>
+            <th>total exp.</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% rows.forEach(r => { %>
+         <tr>
+            <td><%= r.first_name %> <%= surname %></td>
+            <td><%= r.gender_id %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+         </tr>   
+       <% }); %>
+    </tbody>
+  </table>

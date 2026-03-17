@@ -34,7 +34,7 @@ router.get("/addform", async (req,res)=>{
 //controll routes
 router.post("/add", insertData)
 router.get("/display/:applicantId",getApplicantDetails)
-router.get("/display", getData)
+router.get("/", getData)
 
 
 

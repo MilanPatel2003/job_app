@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -147,4 +147,139 @@ h1{
 <% }) %>
 
 </body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Applicant Details</title>
+</head>
+<body>
+
+<% basicDetails.forEach(b => { %>
+    <fieldset>
+        <legend>Basic Details</legend>
+        <h2><%= b.first_name %> <%= b.middle_name %> <%= b.surname %></h2>
+        
+        <table border="1" cellpadding="5" cellspacing="0" width="100%">
+            <tr>
+                <th>Gender</th>
+                <td><%= b.gender_name %></td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td><%= b.date_of_birth %></td>
+            </tr>
+            <tr>
+                <th>Marital Status</th>
+                <td><%= b.marital_status %></td>
+            </tr>
+            <tr>
+                <th>Phone Number</th>
+                <td><%= b.phone_number %></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><%= b.email %></td>
+            </tr>
+            <tr>
+                <th>Current Designation</th>
+                <td><%= b.current_designation %></td>
+            </tr>
+            <tr>
+                <th>Total Experience</th>
+                <td><%= b.total_experience_years %> Years</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>
+                    <%= b.address_line1 %><br>
+                    <% if(b.address_line2) { %><%= b.address_line2 %><br><% } %>
+                    <%= b.city_name %>, <%= b.state_name %> - <%= b.postal_code %><br>
+                    <%= b.country %>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    <br>
+<% }) %>
+
+<fieldset>
+    <legend>Education</legend>
+    <% educationDetails.forEach(e => { %>
+        <p>
+            <strong><%= e.course_type_name %></strong><br>
+            Board/University: <%= e.board_or_university %><br>
+            Passing Year: <%= e.passing_year %> | Percentage: <%= e.percentage %>%
+        </p>
+        <hr>
+    <% }) %>
+</fieldset>
+<br>
+
+<fieldset>
+    <legend>Work Experience</legend>
+    <% workDetails.forEach(w => { %>
+        <p>
+            <strong><%= w.designation %></strong> at <%= w.company_name %><br>
+            Duration: <%= w.start_date %> to <%= w.end_date || 'Present' %>
+        </p>
+        <hr>
+    <% }) %>
+</fieldset>
+<br>
+
+<fieldset>
+    <legend>Technologies</legend>
+    <ul>
+        <% technologyDetails.forEach(t => { %>
+            <li><%= t.technology_name %> - <%= t.proficiency_level_name %></li>
+        <% }) %>
+    </ul>
+</fieldset>
+<br>
+
+<fieldset>
+    <legend>Languages</legend>
+    <table border="1" cellpadding="5" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Language</th>
+                <th>Read</th>
+                <th>Speak</th>
+                <th>Write</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% languageDetails.forEach(l => { %>
+                <tr>
+                    <td><%= l.language_name %></td>
+                    <td><%= l.can_read ? 'Yes' : 'No' %></td>
+                    <td><%= l.can_speak ? 'Yes' : 'No' %></td>
+                    <td><%= l.can_write ? 'Yes' : 'No' %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</fieldset>
+<br>
+
+<fieldset>
+    <legend>References</legend>
+    <% referenceDetails.forEach(r => { %>
+        <p>
+            <strong><%= r.reference_name %></strong> (<%= r.relationship_name %>)<br>
+            <%= r.designation %> at <%= r.company_name %><br>
+            Phone: <%= r.phone_number %> | Email: <%= r.email %>
+        </p>
+        <hr>
+    <% }) %>
+</fieldset>
+
+</body>
 </html>
+
