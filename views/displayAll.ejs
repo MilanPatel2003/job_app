@@ -1,85 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>APPLICANTS DATA</title>
-  </head>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Applicants Data</title>
+
   <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f9fafb;
+      margin: 40px;
+    }
+
     h1 {
       text-align: center;
-      color: 1f2937;
+      color: #1f2937;
+      margin-bottom: 30px;
     }
+
     table {
       width: 100%;
       border-collapse: collapse;
-      font-family: Arial, Helvetica, sans-serif;
       background-color: white;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      overflow: hidden;
     }
 
     th {
       background-color: #2f855a;
       color: white;
-      padding: 10px;
+      padding: 12px;
       text-align: left;
+      font-size: 14px;
     }
 
     td {
-      padding: 10px;
+      padding: 12px;
       border-bottom: 1px solid #e5e7eb;
+      font-size: 14px;
     }
 
     tbody tr:hover {
       background-color: #f0fdf4;
-      transition: background-color 0.2s ease;
+      transition: 0.2s;
+    }
+
+    .no-data {
+      text-align: center;
+      padding: 20px;
+      color: #6b7280;
     }
   </style>
-  <body></body>
-</html>
-  <!-- {
-    applicant_id: 1,
-    first_name: 'Milan',
-    middle_name: 'B.',
-    surname: 'Patel',
-    gender_id: 2,
-    date_of_birth: 2003-10-21T18:30:00.000Z,
-    marital_status_id: 3,
-    address_line1: 'A/17, EVREGREEN SOCIETY, NR. KABIR ENCLAVE, BOPAL',
-    address_line2: 'A/17, EVREGREEN SOCIETY, NR. KABIR ENCLAVE, BOPAL',
-    city: 23,
-    state: 7,
-    postal_code: '380058',
-    country: 'India',
-    phone_number: '9157770634',
-    email: 'milan@gmail.com',
-    current_designation: 'Jr. full stack developer',
-    total_experience_years: '1.50',
-    created_at: 2026-03-17T05:34:36.000Z
-  } -->
+</head>
+
+<body>
+
+  <h1>Applicants Data</h1>
 
   <table>
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>DOB</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Current Designation</th>
-            <th>total exp.</th>
-        </tr>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>DOB</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Designation</th>
+        <th>Experience</th>
+      </tr>
     </thead>
+
     <tbody>
-        <% rows.forEach(r => { %>
-         <tr>
-            <td><%= r.first_name %> <%= surname %></td>
-            <td><%= r.gender_id %></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-         </tr>   
-       <% }); %>
+      <% if (rows.length===0) { %>
+        <tr>
+          <td colspan="7" class="no-data">No applicants found</td>
+        </tr>
+        <% } %>
+
+          <% rows.forEach(r=> { %>
+            <tr>
+              <!-- Name -->
+              <td>
+                <%= r.first_name %>
+                  <%= r.middle_name ? r.middle_name : '' %>
+                    <%= r.surname %>
+              </td>
+
+              <!-- Gender (map instead of ID) -->
+              <td>
+                <%= r.gender_id==1 ? 'Male' : r.gender_id==2 ? 'Female' : r.gender_id==3 ? 'Other' : 'N/A' %>
+              </td>
+
+              <!-- DOB formatted -->
+              <td>
+                <%= new Date(r.date_of_birth).toLocaleDateString('en-IN') %>
+              </td>
+
+              <!-- Phone -->
+              <td>
+                <%= r.phone_number %>
+              </td>
+
+              <!-- Email -->
+              <td>
+                <%= r.email %>
+              </td>
+
+              <!-- Designation -->
+              <td>
+                <%= r.current_designation %>
+              </td>
+
+              <!-- Experience -->
+              <td>
+                <%= r.total_experience_years %> yrs
+              </td>
+            </tr>
+            <% }); %>
     </tbody>
   </table>
+
+</body>
+
+</html>
