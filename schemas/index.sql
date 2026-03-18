@@ -177,7 +177,7 @@ CREATE TABLE applicant_references (
 );
 SET FOREIGN_KEY_CHECKS= 0 ;
 
-select * from applicants;
+select * from applicant_references;
 
 
 

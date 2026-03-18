@@ -1,5 +1,6 @@
 import db from "../config/db.js";
 
+
 const getApplicantDetails = async (req, res) => {
   let conn;
   try {
@@ -64,7 +65,7 @@ WHERE e.applicant_id = ?;`;
     w.end_date 
 FROM applicant_work_experiences w
 JOIN applicants a ON a.applicant_id = w.applicant_id
-WHERE a.applicant_id = 1;`;
+WHERE a.applicant_id = ?;`;
 
     const [workDetails] = await conn.query(workQuery, [applicantId]);
     console.log(workDetails);
@@ -79,7 +80,7 @@ WHERE a.applicant_id = 1;`;
     al.can_write 
 FROM applicant_languages al
 JOIN languages l ON l.language_id = al.language_id
-WHERE al.applicant_id = 1;`;
+WHERE al.applicant_id = ?;`;
 
     const [languageDetails] = await conn.query(languageQuery, [applicantId]);
 
@@ -93,7 +94,7 @@ WHERE al.applicant_id = 1;`;
  ON t.technology_id = at.technology_id
  JOIN proficiency_levels p 
  ON p.proficiency_level_id=at.proficiency_level_id
- WHERE at.applicant_id = 1;`;
+ WHERE at.applicant_id = ?;`;
 
     const [technologyDetails] = await conn.query(technologyQuery, [
       applicantId,
@@ -109,11 +110,8 @@ WHERE al.applicant_id = 1;`;
  FROM applicant_references r
  JOIN reference_relationships rr
  ON rr.reference_relationship_id=r.reference_relationship_id;
- `
-    const [referenceDetails] = await conn.query(referenceQuery, [
-      applicantId,
-    ]);
-
+ `;
+    const [referenceDetails] = await conn.query(referenceQuery, [applicantId]);
 
     await conn.commit();
 
@@ -123,7 +121,7 @@ WHERE al.applicant_id = 1;`;
       technologyDetails,
       workDetails,
       languageDetails,
-      referenceDetails
+      referenceDetails,
     });
   } catch (err) {
     if (conn) {

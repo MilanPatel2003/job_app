@@ -92,4 +92,4 @@ SELECT at.applicant_id,
  
 
 
-select * from applicant_educations;
+select * from applicants;

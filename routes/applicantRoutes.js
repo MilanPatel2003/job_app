@@ -11,6 +11,9 @@ import getTechnologies from "../controllers/getTechnologies.js"
 import getState from "../controllers/getStates.js"
 import getCities from "../controllers/getCities.js"
 import getApplicantDetails from "../controllers/getApplicantDetails.js"
+import deleteApplicant from "../controllers/deleteApplicant.js"
+import { getApplicationById } from "../controllers/getApplicantById.js"
+import { updateApplication } from "../controllers/updateApplicant.js"
 const router = express.Router()
 
 // ejs routes
@@ -34,7 +37,10 @@ router.get("/addform", async (req,res)=>{
 //controll routes
 router.post("/add", insertData)
 router.get("/display/:applicantId",getApplicantDetails)
+router.get("/edit/:editApplicantId",getApplicationById)
+router.post("/update/:id", updateApplication);
 router.get("/", getData)
+router.get("/delete/:applicantId", deleteApplicant)
 
 
 

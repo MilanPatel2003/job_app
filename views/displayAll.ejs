@@ -1,127 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Applicants Data</title>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APPLICANTS DATA</title>
+  </head>
   <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: #f9fafb;
-      margin: 40px;
-    }
-
     h1 {
       text-align: center;
-      color: #1f2937;
-      margin-bottom: 30px;
+      color: 1f2937;
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
+      font-family: Arial, Helvetica, sans-serif;
       background-color: white;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      border-radius: 8px;
-      overflow: hidden;
     }
 
     th {
       background-color: #2f855a;
       color: white;
-      padding: 12px;
+      padding: 10px;
       text-align: left;
-      font-size: 14px;
     }
 
     td {
-      padding: 12px;
+      padding: 10px;
       border-bottom: 1px solid #e5e7eb;
-      font-size: 14px;
     }
 
     tbody tr:hover {
       background-color: #f0fdf4;
-      transition: 0.2s;
+      transition: background-color 0.2s ease;
     }
+    /* Pagination bar */
+.pagination {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  background-color: #f9fafb;
+  border-top: 1px solid #e5e7eb;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
 
-    .no-data {
-      text-align: center;
-      padding: 20px;
-      color: #6b7280;
-    }
+/* Pagination buttons */
+.pagination a {
+  padding: 6px 12px;
+  text-decoration: none;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #374151;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+/* Hover */
+.pagination a:hover {
+  background: #ecfdf5;
+  border-color: #2f855a;
+  color: #2f855a;
+}
+
+/* Active page */
+.pagination a.active {
+  background-color: #2f855a;
+  color: white;
+  border-color: #2f855a;
+  font-weight: 600;
+}
+a{
+  text-decoration: none;
+}
   </style>
-</head>
-
-<body>
-
-  <h1>Applicants Data</h1>
+  <body></body>
+</html>
+  <!-- {
+    applicant_id: 1,
+    first_name: 'Milan',
+    middle_name: 'B.',
+    surname: 'Patel',
+    gender_id: 2,
+    date_of_birth: 2003-10-21T18:30:00.000Z,
+    marital_status_id: 3,
+    address_line1: 'A/17, EVREGREEN SOCIETY, NR. KABIR ENCLAVE, BOPAL',
+    address_line2: 'A/17, EVREGREEN SOCIETY, NR. KABIR ENCLAVE, BOPAL',
+    city: 23,
+    state: 7,
+    postal_code: '380058',
+    country: 'India',
+    phone_number: '9157770634',
+    email: 'milan@gmail.com',
+    current_designation: 'Jr. full stack developer',
+    total_experience_years: '1.50',
+    created_at: 2026-03-17T05:34:36.000Z
+  } -->
 
   <table>
     <thead>
-      <tr>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>DOB</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Designation</th>
-        <th>Experience</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% if (rows.length===0) { %>
+      <tr><td colspan="11" align="right">
+        <button type="button"><a href="addForm">Add applicant</a></button>
+      </td></tr>
         <tr>
-          <td colspan="7" class="no-data">No applicants found</td>
+          <th>ID</th>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>DOB</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Current Designation</th>
+            <th>total exp.</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>delete</th>
         </tr>
-        <% } %>
-
-          <% rows.forEach(r=> { %>
-            <tr>
-              <!-- Name -->
-              <td>
-                <%= r.first_name %>
-                  <%= r.middle_name ? r.middle_name : '' %>
-                    <%= r.surname %>
-              </td>
-
-              <!-- Gender (map instead of ID) -->
-              <td>
-                <%= r.gender_id==1 ? 'Male' : r.gender_id==2 ? 'Female' : r.gender_id==3 ? 'Other' : 'N/A' %>
-              </td>
-
-              <!-- DOB formatted -->
-              <td>
-                <%= new Date(r.date_of_birth).toLocaleDateString('en-IN') %>
-              </td>
-
-              <!-- Phone -->
-              <td>
-                <%= r.phone_number %>
-              </td>
-
-              <!-- Email -->
-              <td>
-                <%= r.email %>
-              </td>
-
-              <!-- Designation -->
-              <td>
-                <%= r.current_designation %>
-              </td>
-
-              <!-- Experience -->
-              <td>
-                <%= r.total_experience_years %> yrs
-              </td>
-            </tr>
-            <% }); %>
+    </thead>
+    <tbody>
+        <% rows.forEach(r => { %>
+         <tr>
+          <td><%= r.applicant_id %></td>
+            <td><%= r.first_name %> <%= r.surname %></td>
+            <td><%= r.gender_id ==1 ? 'Male': r.gender_id==2 ? 'Female': r.gender_id==3 ? 'Other': 'N/A' %></td>
+            <td><%= new Date(r.date_of_birth).toLocaleDateString('en-IN') %></td>
+            <td><%= r.phone_number %></td>
+            <td><%= r.email %></td>
+            <td> <%= r.current_designation %> </td>
+            <td><%= r.total_experience_years %></td>
+            <td><span><a href="/display/<%= r.applicant_id %>">&#128065;</a></span></td>
+            <td><span><a href="/edit/<%= r.applicant_id %>">&#128221;</a></span></td>
+            <td> <span><a href="/delete/<%= r.applicant_id %>"> &#128465;</span></a></td>
+         </tr>   
+       <% }); %>
     </tbody>
   </table>
 
-</body>
+<%
+let start
+let end
+if (currentPage < 10) {
+  start = 1
+  end = Math.min(10, totalPages)
 
+}
+else if (currentPage > totalPages -9) {
+  start = currentPage-9
+  end = totalPages
+}
+
+else{
+ start = currentPage - 9
+ end = currentPage + 9
+}
+
+
+%>
+
+
+<div class="pagination">
+<% if(currentPage > 1) { %>
+    <a href="/?page=<%= currentPage - 1 %>">Prev</a>
+<% } %>
+  <% for (let i = start;  i <= end; i++) { %>
+     <% if (currentPage === i) { %>
+       <a href="/?page=<%= i  %>" class="active"><%= i %></a>
+        <% } else { %>
+         <a href="/?page=<%= i  %>"><%= i %></a>
+        <% } %>
+ <% } %>
+
+
+
+<% if(currentPage < totalPages) { %>
+    <a href="/?page=<%= currentPage + 1 %>&search=<%= searchTerm %>">Next</a>
+<% } %>
+</div>
 </html>
