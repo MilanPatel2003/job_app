@@ -143,7 +143,8 @@ VALUES (?,?,?,?,?,?,?)`,
 
     await conn.commit();
 
-    res.send("Application saved");
+    // res.send("Application saved");
+    res.redirect("/")
   } catch (err) {
     if (conn) await conn.rollback();
 

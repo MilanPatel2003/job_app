@@ -9,11 +9,12 @@ const getData = async (req, res) => {
     const [countResult] = await db.query(`SELECT COUNT(*) AS TOTAL FROM applicants`)
     const totalRows = countResult[0].TOTAL;
     const totalPages = Math.ceil(totalRows/limit)
-  
+
     const [rows,fields] = await db.query(`SELECT * FROM applicants LIMIT ? OFFSET ?`,[limit,offset])
     console.log(rows);
+
     
-    res.render("displayAll",{rows,fields})
+    res.render("displayAll",{rows,fields,currentPage:page,totalPages})
   } catch (err) {
     console.error(err);
     res.status(500).send(err.message);
