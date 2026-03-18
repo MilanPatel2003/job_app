@@ -1,6 +1,6 @@
-create database job_application;
-use job_application;
-
+create database job_application2;
+use job_application2;
+-- drop database job_application2;
 -- =========================
 -- LOOKUP TABLES
 -- =========================
@@ -177,7 +177,7 @@ CREATE TABLE applicant_references (
 );
 SET FOREIGN_KEY_CHECKS= 0 ;
 
-select * from applicant_references;
+select * from applicants;
 
 
 

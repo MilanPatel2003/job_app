@@ -3,7 +3,7 @@ import db from "../config/db.js";
 const getData = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = 50;
+    const limit = 30;
     const offset = (page - 1) * limit;
 
     const [countResult] = await db.query(`SELECT COUNT(*) AS TOTAL FROM applicants`)

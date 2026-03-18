@@ -109,9 +109,13 @@ WHERE al.applicant_id = ?;`;
  rr.relationship_name 
  FROM applicant_references r
  JOIN reference_relationships rr
- ON rr.reference_relationship_id=r.reference_relationship_id;
+ ON rr.reference_relationship_id=r.reference_relationship_id
+ WHERE r.applicant_id = ?
+ ;
  `;
     const [referenceDetails] = await conn.query(referenceQuery, [applicantId]);
+    console.log(referenceDetails);
+    
 
     await conn.commit();
 
