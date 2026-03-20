@@ -3,8 +3,8 @@ import mysql from "mysql2/promise";
 const db = await mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "root",
-  database: "job_application2",
+  password: "Dev@1234",
+  database: "job_application",
 });
 
 const firstNames = [

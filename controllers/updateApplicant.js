@@ -157,7 +157,6 @@ export const updateApplication = async (req, res) => {
       }
     }
 
-    // =========================
 
     await conn.commit();
 
