@@ -102,9 +102,25 @@ a{
 
   <table>
     <thead>
-      <tr><td colspan="11" align="right">
-        <button type="button"><a href="addForm">Add applicant</a></button>
-      </td></tr>
+      <tr>
+  <form method="GET" action="/">
+    <td colspan="6">
+      <input 
+        type="text" 
+        name="search" 
+        placeholder="Search by name, email, phone..."
+        value="<%= search || '' %>"
+      >
+    </td>
+    <td colspan="11" align="right">
+      <button type="submit">Search</button>
+      <button type="button">
+        <a href="addForm">Add applicant</a>
+      </button>
+    </td>
+  </form>
+</tr>
+  
         <tr>
           <th>ID</th>
             <th>Name</th>
