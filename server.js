@@ -12,6 +12,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+
 app.use("/", applicantRoutes);
 app.use("/combos", comboRoutes);
 app.use("/admin" , adminRoutes)

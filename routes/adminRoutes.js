@@ -61,7 +61,7 @@ router.post("/course/delete/:id", adminController.deleteCourseType);
 //language
 router.post("/language/add", adminController.addLanguage);
 router.post("/language/edit:id", adminController.editLanguage);
-router.post("language/delete/:id", adminController.deleteLanguage);
+router.post("/language/delete/:id", adminController.deleteLanguage);
 
 //Proficiency
 router.post("/proficiency/add", adminController.addProficiency);

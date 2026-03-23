@@ -81,6 +81,11 @@
         h2 {
             color: #333;
         }
+
+        select {
+            font-size: 20px;
+            width: 80%;
+        }
     </style>
 </head>
 
@@ -212,7 +217,162 @@
                     <% }); %>
             </table>
         </div>
+
+        <div class="languages_container">
+            <h2>Manage languages</h2>
+            <table>
+                <tr>
+                    <td colspan="4">
+                        <form action="/admin/language/add" method="post">
+                            <input type="text" name="addLanguageName" id="addLanguageName" placeholder="Enter language">
+                            <button type="submit">Add</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Languages</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+
+                <% languages.forEach(l=> { %>
+                    <tr>
+                        <td>
+                            <%= l.language_id %>
+                        </td>
+                        <td>
+                            <form action="/admin/language/edit/<%= l.language_id %>" method="post">
+                                <input type="text" name="languageName" value="<%= l.language_name %>">
+                        </td>
+                        <td>
+                            <button type="submit">Save</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/language/delete/<%= l.language_id %>"
+                                onsubmit="return confirm('Delete this status?');">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </table>
+        </div>
+
+        <div class="state_container">
+            <h2>Manage states</h2>
+            <table>
+                <tr>
+                    <td colspan="4">
+                        <form action="/admin/state/add" method="post">
+                            <input type="text" name="addStateName" id="addStateName" placeholder="Enter State">
+                            <button type="submit">Add</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>States</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+
+                <% states.forEach(s=> { %>
+                    <tr>
+                        <td>
+                            <%= s.state_id %>
+                        </td>
+                        <td>
+                            <form action="/admin/state/edit/<%= s.state_id %>" method="post">
+                                <input type="text" name="stateName" value="<%= s.state_name %>">
+                        </td>
+                        <td>
+                            <button type="submit">Save</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/state/delete/<%= s.state_id %>"
+                                onsubmit="return confirm('Delete this state?');">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </table>
+        </div>
+
+        <div class="city">
+            <h2>Manage city</h2>
+            <table id="city_table">
+                <thead>
+                <tr>
+                    <td colspan="1"><select name="selectedState" onchange="generateCities()" id="state">
+                            <% states.forEach(s=>{ %>
+                                <option value="<%= s.state_id %>">
+                                    <%= s.state_name %>
+                                </option>
+                                <% }) %>
+                        </select>
+                    </td>
+                    <td colspan="3">
+                        <form action="/admin/city/add" method="post">
+                                <input type="hidden" name="selectedState" id="selectedState">
+
+                            <input type="text" name="addCityName" id="addCityName" placeholder="Enter city">
+                            <button type="submit">Add</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>city</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+
+
+            </table>
+        </div>
     </div>
 </body>
+<script>
+    async function generateCities() {
+        const stateId = document.getElementsByName("selectedState")[0].value;
+        const cityBody = document.querySelector("#city_table tbody")
+        const response = await fetch(`/combos/city/${stateId}`)
+        const cities = await response.json();      
+        cityBody.innerHTML= "";
+
+        cities.forEach(c => {
+            const row = `
+                <tr>
+                    <td>${c.city_id}</td>
+                    <td>
+                        <form action="/admin/city/edit/${c.city_id}" method="post">
+
+                         <input type="text" name="cityName" value="${c.city_name}">
+                        </td>
+                         <td>
+                            <button type="submit">Save</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/city/delete/${c.city_id}"
+                                onsubmit="return confirm('Delete this city?');">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                </tr>
+            `
+            cityBody.innerHTML += row;
+        });
+
+    }
+</script>
 
 </html>

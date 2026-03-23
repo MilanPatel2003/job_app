@@ -35,7 +35,7 @@ const deleteGender = async (req, res) => {
 };
 
 const addState = async (req, res) => {
-  const stateName = req.body.stateName; 
+  const stateName = req.body.addStateName; 
   try {
     await db.query(`INSERT INTO states (state_name) VALUES (?)`, [stateName]);
     res.redirect("/admin");
@@ -48,18 +48,18 @@ const deleteState = async (req, res) => {
   const id = req.params.id;
   try {
     await db.query(`DELETE FROM states WHERE state_id=?`, [id]);
-    res.redirect("/admin");
+    res.redirect("/admin.form");
   } catch (err) {
     res.status(500).send(err.message);
   }
 };
 
 const addCity = async (req, res) => {
-  const cityName = req.body.cityName;
-  const stateId = req.body.stateId; 
+  const cityName = req.body.addCityName;
+  const stateId = req.body.selectedState; 
   try {
     await db.query(`INSERT INTO cities (city_name, state_id) VALUES (?, ?)`, [cityName, stateId]);
-    res.redirect("/admin");
+    res.redirect("/admin/form");
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -68,13 +68,13 @@ const addCity = async (req, res) => {
 const editCity = async (req, res) => {
   const id = req.params.id;
   const cityName = req.body.cityName;
-  const stateId = req.body.stateId;
+  const stateId = req.body.selectedState;
   try {
     await db.query(
       `UPDATE cities SET city_name=?, state_id=? WHERE city_id=?`,
       [cityName, stateId, id],
     );
-    res.redirect("/admin");
+    res.redirect("/admin/form");
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -84,7 +84,7 @@ const deleteCity = async (req, res) => {
   const id = req.params.id;
   try {
     await db.query(`DELETE FROM cities WHERE city_id=?`, [id]);
-    res.redirect("/admin");
+    res.redirect("/admin/form");
   } catch (err) {
     res.status(500).send(err.message);
   }
@@ -159,7 +159,7 @@ const deleteCourseType = async (req, res) => {
 };
 
 const addLanguage = async (req, res) => {
-  const languageName = req.body.languageName;
+  const languageName = req.body.addLanguageName;
   try {
     await db.query(`INSERT INTO languages (language_name) VALUES (?)`, [languageName]);
     res.redirect("/admin");
@@ -176,7 +176,7 @@ const editLanguage = async (req, res) => {
       `UPDATE languages SET language_name=? WHERE language_id=?`,
       [languageName, id],
     );
-    res.redirect("/admin");
+    res.redirect("/admin/form");
   } catch (err) {
     res.status(500).send(err.message);
   }
