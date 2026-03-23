@@ -1,6 +1,6 @@
-create database job_application2;
-use job_application2;
--- drop database job_application2;
+create database job_application;
+use job_application;
+
 -- =========================
 -- LOOKUP TABLES
 -- =========================
@@ -177,7 +177,20 @@ CREATE TABLE applicant_references (
 );
 SET FOREIGN_KEY_CHECKS= 0 ;
 
-select * from applicants;
+select * from applicant_references;
+
+select * from applicant_languages;
+
+
+SELECT at.applicant_id,
+ t.technology_name,
+ p.proficiency_level_name
+ FROM applicant_technologies at
+ JOIN technologies t
+ ON t.technology_id = at.technology_id
+ JOIN proficiency_levels p 
+ ON p.proficiency_level_id=at.proficiency_level_id
+ WHERE at.applicant_id = 1;
 
 
 

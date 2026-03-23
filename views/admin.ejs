@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ADMIN</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        form {
+            display: flex;
+        }
+
+        th,
+        td {
+            border: 1px solid #4b71a5;
+            padding: 5px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #2f5485;
+            color: white;
+        }
+
+
+        input[type="text"] {
+            padding: 8px 12px;
+            border: 1px solid #3773a2;
+            border-radius: 4px;
+            width: 100%;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #2f5485;
+        }
+
+        button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        button[type="submit"] {
+            background-color: #2f5485;
+            color: white;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #223d61;
+        }
+
+
+        h2 {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="gender_container">
+            <h2>Manage Genders</h2>
+            <table>
+                <tr>
+                    <td colspan="4">
+                        <form action="/admin/gender/add" method="post">
+                            <input type="text" name="addGender" id="addGender" placeholder="Enter gender">
+                            <button type="submit">Add</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Gender</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+                <% genders.forEach(g=> { %>
+                    <tr>
+                        <td>
+                            <%= g.gender_id %>
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/gender/edit/<%= g.gender_id %>">
+                                <input type="text" name="genderName" value="<%= g.gender_name %>" required>
+                        </td>
+                        <td>
+                            <button type="submit">Save</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/gender/delete/<%= g.gender_id %>"
+                                onsubmit="return confirm('Delete this gender?');">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </table>
+        </div>
+
+        <div class="course_container">
+            <h2>Manage Course Types</h2>
+            <table>
+                <tr>
+                    <td colspan="4">
+                        <form action="/admin/course/add" method="post">
+                            <input type="text" name="addCourseTypeName" id="courseTypeName"
+                                placeholder="Enter course type">
+                            <button type="submit">Add</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Course Type</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+
+                <% courseTypes.forEach(c=> { %>
+                    <tr>
+                        <td>
+                            <%= c.course_type_id %>
+                        </td>
+                        <td>
+                            <form action="/admin/course/edit/<%= c.course_type_id %>" method="post">
+                                <input type="text" name="courseTypeName" value="<%= c.course_type_name %>">
+                        </td>
+                        <td>
+                            <button type="submit">Save</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/course/delete/<%= c.course_type_id %>"
+                                onsubmit="return confirm('Delete this course?');">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </table>
+        </div>
+
+        <div class="marital_status_container">
+            <h2>Manage marital status</h2>
+            <table>
+                <tr>
+                    <td colspan="4">
+                        <form action="/admin/maritualstatus/add" method="post">
+                            <input type="text" name="addMaritalStatusName" id="addMaritalStatusName"
+                                placeholder="Enter marital status type">
+                            <button type="submit">Add</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Maritual status Type</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+
+                <% maritalStatuses.forEach(m=> { %>
+                    <tr>
+                        <td>
+                            <%= m.marital_status_id %>
+                        </td>
+                        <td>
+                            <form action="/admin/maritualstatus/edit/<%= m.marital_status_id %>" method="post">
+                                <input type="text" name="maritalStatusName" value="<%= m.marital_status_name %>">
+                        </td>
+                        <td>
+                            <button type="submit">Save</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="POST" action="/admin/maritualstatus/delete/<%= m.marital_status_id %>"
+                                onsubmit="return confirm('Delete this status?');">
+                                <button type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% }); %>
+            </table>
+        </div>
+
+        <div class="language_container">
+            <h2>Manage languages</h2>
+            <table>
+                <tr><td colspan="4">
+                    <form action="/admin/language/add" method="post">
+                    <input type="text" name="addLanguageName" id="addLanguageName" placeholder="Enter language">
+                    <button type="submit">Add</button>
+                    </form>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Language name</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+                <% languages.forEach(l => { %>
+                    <tr>
+                    <td><%= l.language_id %></td>
+                    <td>
+                        <form action="/admin/language/edit/<%= l.language_id %>" method="post">
+                       <input type="text" name="languageName" value="<%= l.language_name %>">
+
+                    </td>
+                    <td> <button type="submit">Save</button></td>
+                </form>
+                <td>
+                    <form action="/admin/language/delete/<%= l.language_id %>" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                    
+                    </tr>
+               <% }); %>
+            </table>
+
+        </div>
+
+                <div class="proficiency_container">
+            <h2>Manage proficiencies</h2>
+            <table>
+                <tr><td colspan="4">
+                    <form action="/admin/proficiency/add" method="post">
+                    <input type="text" name="addProficiencyName" id="addProficiencyName" placeholder="Enter proficiency">
+                    <button type="submit">Add</button>
+                    </form>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>proficiency name</th>
+                    <th>Save</th>
+                    <th>Delete</th>
+                </tr>
+                <% proficiencyLevels.forEach(l => { %>
+                    <tr>
+                    <td><%= l.proficiency_level_id %></td>
+                    <td>
+                        <form action="/admin/proficiency/edit/<%= l.proficiency_level_id %>" method="post">
+                       <input type="text" name="proficiencyName" value="<%= l.proficiency_level_name %>">
+
+                    </td>
+                    <td> <button type="submit">Save</button></td>
+                </form>
+                <td>
+                    <form action="/admin/proficiency/delete/<%= l.proficiency_level_id %>" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+                    
+                    </tr>
+               <% }); %>
+            </table>
+
+        </div>
+    </div>
+</body>
+
+</html>

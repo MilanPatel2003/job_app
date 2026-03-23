@@ -4,194 +4,195 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>APPLICANTS DATA</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 50px;
+        background: #f9fafb;
+      }
+
+      h1 {
+        text-align: center;
+        color: #1f2937; 
+        margin-bottom: 15px;
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        gap: 10px;
+      }
+
+      .search-form {
+        display: flex;
+        gap: 8px;
+      }
+
+      .search-form input {
+        padding: 8px 12px;
+        border: 1px solid #3a6397;
+        border-radius: 4px;
+        font-size: 17px;
+        width: 100%;
+      }
+ 
+
+      .btn {
+        padding: 8px 16px;
+        background: #2f5485;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        text-decoration: none;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        background: #223d61;
+      }
+
+      /* Table */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      th {
+        background: #2f5485;
+        color: white;
+        padding: 10px;
+        text-align: left;
+        font-weight: 600;
+      }
+
+      td {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+      }
+
+      tbody tr:hover {
+        background: #f0fdf4;
+      }
+      
+
+      .pagination {
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        flex-wrap: wrap;
+      }
+
+      .pagination a {
+        padding: 6px 12px;
+        border: 1px solid #ddd;
+        background: white;
+        color: #333;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .pagination a:hover {
+        background: #ecfdf5;
+        border-color: #223d61;
+        color: #223d61;
+      }
+
+      .pagination a.active {
+        background: #2f5485;
+        color: white;
+        border-color: #2f5485;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+    </style>
   </head>
-  <style>
-    h1 {
-      text-align: center;
-      color: 1f2937;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: white;
-    }
+  <body>
+    <h1>APPLICANTS DATA</h1>
 
-    th {
-      background-color: #2f855a;
-      color: white;
-      padding: 10px;
-      text-align: left;
-    }
+    <!-- Toolbar outside table -->
+    <div class="toolbar">
+      <form class="search-form" action="/" method="GET">
+        <input type="text" name="search" placeholder="Search..." value="<%= search %>"/>
+        <button type="submit" class="btn">Search</button>
+      </form>
+      <a href="addForm" class="btn">+ Add applicant</a>
+    </div>
 
-    td {
-      padding: 10px;
-      border-bottom: 1px solid #e5e7eb;
-    }
-
-    tbody tr:hover {
-      background-color: #f0fdf4;
-      transition: background-color 0.2s ease;
-    }
-    /* Pagination bar */
-.pagination {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  background-color: #f9fafb;
-  border-top: 1px solid #e5e7eb;
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 6px;
-}
-
-/* Pagination buttons */
-.pagination a {
-  padding: 6px 12px;
-  text-decoration: none;
-  border: 1px solid #d1d5db;
-  background: white;
-  color: #374151;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-/* Hover */
-.pagination a:hover {
-  background: #ecfdf5;
-  border-color: #2f855a;
-  color: #2f855a;
-}
-
-/* Active page */
-.pagination a.active {
-  background-color: #2f855a;
-  color: white;
-  border-color: #2f855a;
-  font-weight: 600;
-}
-a{
-  text-decoration: none;
-}
-  </style>
-  <body></body>
-</html>
-  <!-- {
-    applicant_id: 1,
-    first_name: 'Milan',
-    middle_name: 'B.',
-    surname: 'Patel',
-    gender_id: 2,
-    date_of_birth: 2003-10-21T18:30:00.000Z,
-    marital_status_id: 3,
-    address_line1: 'A/17, EVREGREEN SOCIETY, NR. KABIR ENCLAVE, BOPAL',
-    address_line2: 'A/17, EVREGREEN SOCIETY, NR. KABIR ENCLAVE, BOPAL',
-    city: 23,
-    state: 7,
-    postal_code: '380058',
-    country: 'India',
-    phone_number: '9157770634',
-    email: 'milan@gmail.com',
-    current_designation: 'Jr. full stack developer',
-    total_experience_years: '1.50',
-    created_at: 2026-03-17T05:34:36.000Z
-  } -->
-
-  <table>
-    <thead>
-      <tr>
-  <form method="GET" action="/">
-    <td colspan="6">
-      <input 
-        type="text" 
-        name="search" 
-        placeholder="Search by name, email, phone..."
-        value="<%= search || '' %>"
-      >
-    </td>
-    <td colspan="11" align="right">
-      <button type="submit">Search</button>
-      <button type="button">
-        <a href="addForm">Add applicant</a>
-      </button>
-    </td>
-  </form>
-</tr>
-  
+    <table>
+      <thead>
         <tr>
           <th>ID</th>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>DOB</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Current Designation</th>
-            <th>total exp.</th>
-            <th>View</th>
-            <th>Edit</th>
-            <th>delete</th>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>DOB</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Designation</th>
+          <th>Exp.</th>
+          <th>View</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <% rows.forEach(r => { %>
          <tr>
           <td><%= r.applicant_id %></td>
-            <td><%= r.first_name %> <%= r.surname %></td>
-            <td><%= r.gender_id ==1 ? 'Male': r.gender_id==2 ? 'Female': r.gender_id==3 ? 'Other': 'N/A' %></td>
-            <td><%= new Date(r.date_of_birth).toLocaleDateString('en-IN') %></td>
-            <td><%= r.phone_number %></td>
-            <td><%= r.email %></td>
-            <td> <%= r.current_designation %> </td>
-            <td><%= r.total_experience_years %></td>
-            <td><span><a href="/display/<%= r.applicant_id %>">&#128065;</a></span></td>
-            <td><span><a href="/edit/<%= r.applicant_id %>">&#128221;</a></span></td>
-            <td> <span><a href="/delete/<%= r.applicant_id %>"> &#128465;</span></a></td>
+          <td><%= r.first_name %> <%= r.surname %></td>
+          <td><%= r.gender_id == 1 ? 'Male' : r.gender_id == 2 ? 'Female' : r.gender_id == 3 ? 'Other' : 'N/A' %></td>
+          <td><%= new Date(r.date_of_birth).toLocaleDateString('en-IN') %></td>
+          <td><%= r.phone_number %></td>
+          <td><%= r.email %></td>
+          <td><%= r.current_designation %></td>
+          <td><%= r.total_experience_years %></td>
+          <td><a href="/display/<%= r.applicant_id %>">👁</a></td>
+          <td><a href="/edit/<%= r.applicant_id %>">✏️</a></td>
+          <td><a href="/delete/<%= r.applicant_id %>">🗑️</a></td>
          </tr>   
-       <% }); %>
-    </tbody>
-  </table>
+        <% }); %>
+      </tbody>
+    </table>
 
-<%
-let start
-let end
-if (currentPage < 10) {
-  start = 1
-  end = Math.min(10, totalPages)
+    <%
+      let start, end;
+      if (currentPage < 10) {
+        start = 1;
+        end = Math.min(10, totalPages);
+      } else if (currentPage > totalPages - 9) {
+        start = currentPage - 9;
+        end = totalPages;
+      } else {
+        start = currentPage - 9;
+        end = currentPage + 9;
+      }
+    %>
 
-}
-else if (currentPage > totalPages -9) {
-  start = currentPage-9
-  end = totalPages
-}
-
-else{
- start = currentPage - 9
- end = currentPage + 9
-}
-
-
-%>
-
-
-<div class="pagination">
-<% if(currentPage > 1) { %>
-    <a href="/?page=<%= currentPage - 1 %>">Prev</a>
-<% } %>
-  <% for (let i = start;  i <= end; i++) { %>
-     <% if (currentPage === i) { %>
-       <a href="/?page=<%= i  %>" class="active"><%= i %></a>
+    <div class="pagination">
+      <% if (currentPage > 1) { %>
+        <a href="/?page=<%= currentPage - 1 %>&search=<%= search %>">Prev</a>
+      <% } %>
+      
+      <% for (let i = start; i <= end; i++) { %>
+        <% if (currentPage === i) { %>
+          <a href="/?page=<%= i %>&search=<%= search %>" class="active"><%= i %></a>
         <% } else { %>
-         <a href="/?page=<%= i  %>"><%= i %></a>
+          <a href="/?page=<%= i %>&search=<%= search %>"><%= i %></a>
         <% } %>
- <% } %>
+      <% } %>
 
-
-
-<% if(currentPage < totalPages) { %>
-    <a href="/?page=<%= currentPage + 1 %>">Next</a>
-<% } %>
-</div>
+      <% if (currentPage < totalPages) { %>
+        <a href="/?page=<%= currentPage + 1 %>&search=<%= search %>">Next</a>
+      <% } %>
+    </div>
+  </body>
 </html>
