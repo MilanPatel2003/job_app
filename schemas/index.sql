@@ -1,23 +1,27 @@
-create database job_application2;
-use job_application2;
--- drop database job_application2;
--- =========================
--- LOOKUP TABLES
--- =========================
+create database job_application;
+use job_application;
 
+-- LOOKUP TABLES
 CREATE TABLE genders (
     gender_id INT AUTO_INCREMENT PRIMARY KEY,
     gender_name VARCHAR(50) NOT NULL UNIQUE
 );
 
+CREATE TABLE countries (
+    country_id INT AUTO_INCREMENT PRIMARY KEY,
+    country_name VARCHAR(50) NOT NULL UNIQUE
+);
+
 CREATE TABLE states(
     state_id INT AUTO_INCREMENT PRIMARY KEY,
-    state_name VARCHAR(50) NOT NULL UNIQUE
+    country_id INT NOT NULL,
+    state_name VARCHAR(50) NOT NULL UNIQUE,
+	FOREIGN KEY (country_id) REFERENCES countries(country_id)
 );
 
 CREATE TABLE cities(
 	city_id INT AUTO_INCREMENT PRIMARY KEY,
-    state_id INT,
+    state_id INT NOT NULL,
     city_name VARCHAR(50) NOT NULL UNIQUE,
     FOREIGN KEY (state_id) REFERENCES states(state_id)
 );
@@ -52,9 +56,7 @@ CREATE TABLE technologies(
 );
 
 
--- =========================
 -- MAIN TABLE
--- =========================
 
 CREATE TABLE applicants (
     applicant_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -71,7 +73,7 @@ CREATE TABLE applicants (
     city INT NOT NULL,
     state INT NOT NULL,
     postal_code VARCHAR(20) NOT NULL,
-    country VARCHAR(100) NOT NULL,
+    country INT NOT NULL,
 
     phone_number VARCHAR(20) NOT NULL,
     email VARCHAR(150) NOT NULL UNIQUE,
@@ -82,12 +84,13 @@ CREATE TABLE applicants (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (gender_id) REFERENCES genders(gender_id),
+	FOREIGN KEY (city) REFERENCES cities(city_id),
+	FOREIGN KEY (state) REFERENCES states(state_id),
+    FOREIGN KEY (country) REFERENCES countries(country_id),
     FOREIGN KEY (marital_status_id) REFERENCES marital_statuses(marital_status_id)
 );
 
--- =========================
 -- EDUCATION DETAILS
--- =========================
 
 CREATE TABLE applicant_educations (
     applicant_education_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -103,9 +106,7 @@ CREATE TABLE applicant_educations (
 );
 
 
--- =========================
 -- WORK EXPERIENCE
--- =========================
 
 CREATE TABLE applicant_work_experiences (
     applicant_work_experience_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -122,9 +123,7 @@ CREATE TABLE applicant_work_experiences (
 );
 
 
--- =========================
 -- LANGUAGES KNOWN
--- =========================
 
 CREATE TABLE applicant_languages (
     applicant_language_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -140,9 +139,7 @@ CREATE TABLE applicant_languages (
 );
 
 
--- =========================
 -- TECHNOLOGIES
--- =========================
 
 CREATE TABLE applicant_technologies (
     applicant_technology_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -156,9 +153,7 @@ CREATE TABLE applicant_technologies (
 );
 
 
--- =========================
 -- REFERENCE DETAILS
--- =========================
 
 CREATE TABLE applicant_references (
     applicant_reference_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -177,7 +172,20 @@ CREATE TABLE applicant_references (
 );
 SET FOREIGN_KEY_CHECKS= 0 ;
 
-select * from applicants;
+select * from applicant_references;
+
+select * from applicant_languages;
+
+
+SELECT at.applicant_id,
+ t.technology_name,
+ p.proficiency_level_name
+ FROM applicant_technologies at
+ JOIN technologies t
+ ON t.technology_id = at.technology_id
+ JOIN proficiency_levels p 
+ ON p.proficiency_level_id=at.proficiency_level_id
+ WHERE at.applicant_id = 1;
 
 
 

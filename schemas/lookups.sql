@@ -1,186 +1,233 @@
--- =========================
 -- GENDERS
--- =========================
 INSERT INTO genders (gender_name) VALUES
 ('Male'),
 ('Female'),
 ('Other');
 
+-- COUNTRIES
+INSERT INTO countries(country_name) VALUES
+("India"),
+("United States"),
+("Canada"),
+("United Kingdom"),
+("Australia"),
+("Germany"),
+("France"),
+("China"),
+("Japan"),
+("Brazil"),
+("South Africa"),
+("Russia"),
+("Mexico"),
+("Italy"),
+("Spain"),
+("Netherlands"),
+("Singapore"),
+("UAE"),
+("Saudi Arabia"),
+("Turkey"),
+("Indonesia"),
+("South Korea"),
+("Argentina"),
+("Nigeria");
 
--- =========================
+
 -- STATES
--- =========================
+INSERT INTO states(country_id, state)
+VALUES 
+('1','Gujarat'),
+('1','Maharashtra'),
+('1','Karnataka'),
+('1','Tamil Nadu'),
+('1','Delhi'),
+('2','California'),
+('2','Texas'),
+('2','New York'),
+('2','Florida'),
+('2','Illinois'),
+('3','Ontario'),
+('3','Quebec'),
+('3','British Columbia'),
+('3','Alberta'),
+('4','England'),
+('4','Scotland'),
+('4','Wales'),
+('4','Northern Ireland'),
+('5','New South Wales'),
+('5','Victoria'),
+('5','Queensland'),
+('5','Western Australia'),
+('6','Bavaria'),
+('6','North Rhine-Westphalia'),
+('6','Berlin'),
+('7','Île-de-France'),
+('7','Provence-Alpes-Côte d’Azur'),
+('7','Auvergne-Rhône-Alpes'),
+('8','Guangdong'),
+('8','Beijing'),
+('8','Shanghai'),
+('8','Sichuan'),
+('9','Tokyo'),
+('9','Osaka'),
+('9','Kanagawa'),
+('9','Aichi'),
+('10','São Paulo'),
+('10','Rio de Janeiro'),
+('10','Minas Gerais'),
+('11','Gauteng'),
+('11','Western Cape'),
+('11','KwaZulu-Natal'),
+('12','Moscow'),
+('12','Saint Petersburg'),
+('12','Novosibirsk'),
+('13','Mexico City'),
+('13','Jalisco'),
+('13','Nuevo León'),
+('14','Lombardy'),
+('14','Lazio'),
+('14','Campania'),
+('15','Madrid'),
+('15','Catalonia'),
+('15','Andalusia'),
+('16','North Holland'),
+('16','South Holland'),
+('16','Utrecht'),
+('17','Singapore'),
+('18','Dubai'),
+('18','Abu Dhabi'),
+('18','Sharjah'),
+('19','Riyadh'),
+('19','Makkah'),
+('19','Eastern Province'),
+('20','Istanbul'),
+('20','Ankara'),
+('20','Izmir'),
+('21','Jakarta'),
+('21','West Java'),
+('21','East Java'),
+('22','Seoul'),
+('22','Busan'),
+('22','Incheon'),
+('23','Buenos Aires'),
+('23','Córdoba'),
+('23','Santa Fe'),
+('24','Lagos'),
+('24','Abuja'),
+('24','Kano');
 
-INSERT INTO states (state_name) VALUES
-('Andhra Pradesh'),
-('Arunachal Pradesh'),
-('Assam'),
-('Bihar'),
-('Chhattisgarh'),
-('Goa'),
-('Gujarat'),
-('Haryana'),
-('Himachal Pradesh'),
-('Jharkhand'),
-('Karnataka'),
-('Kerala'),
-('Madhya Pradesh'),
-('Maharashtra'),
-('Manipur'),
-('Meghalaya'),
-('Mizoram'),
-('Nagaland'),
-('Odisha'),
-('Punjab'),
-('Rajasthan'),
-('Sikkim'),
-('Tamil Nadu'),
-('Telangana'),
-('Tripura'),
-('Uttar Pradesh'),
-('Uttarakhand'),
-('West Bengal');
 
 
--- =========================
 -- CITIES
--- =========================
-
-INSERT INTO cities (state_id, city_name)
-SELECT s.state_id, c.city_name
-FROM states s
-JOIN (
-SELECT 'Andhra Pradesh' state_name,'Visakhapatnam' city_name
-UNION ALL SELECT 'Andhra Pradesh','Vijayawada'
-UNION ALL SELECT 'Andhra Pradesh','Guntur'
-UNION ALL SELECT 'Andhra Pradesh','Nellore'
-UNION ALL SELECT 'Andhra Pradesh','Tirupati'
-
-UNION ALL SELECT 'Arunachal Pradesh','Itanagar'
-UNION ALL SELECT 'Arunachal Pradesh','Tawang'
-UNION ALL SELECT 'Arunachal Pradesh','Pasighat'
-
-UNION ALL SELECT 'Assam','Guwahati'
-UNION ALL SELECT 'Assam','Silchar'
-UNION ALL SELECT 'Assam','Dibrugarh'
-UNION ALL SELECT 'Assam','Jorhat'
-
-UNION ALL SELECT 'Bihar','Patna'
-UNION ALL SELECT 'Bihar','Gaya'
-UNION ALL SELECT 'Bihar','Muzaffarpur'
-UNION ALL SELECT 'Bihar','Bhagalpur'
-
-UNION ALL SELECT 'Chhattisgarh','Raipur'
-UNION ALL SELECT 'Chhattisgarh','Bhilai'
-UNION ALL SELECT 'Chhattisgarh','Bilaspur'
-
-UNION ALL SELECT 'Goa','Panaji'
-UNION ALL SELECT 'Goa','Margao'
-UNION ALL SELECT 'Goa','Vasco da Gama'
-
-UNION ALL SELECT 'Gujarat','Ahmedabad'
-UNION ALL SELECT 'Gujarat','Surat'
-UNION ALL SELECT 'Gujarat','Vadodara'
-UNION ALL SELECT 'Gujarat','Rajkot'
-UNION ALL SELECT 'Gujarat','Gandhinagar'
-UNION ALL SELECT 'Gujarat','Bhavnagar'
-UNION ALL SELECT 'Gujarat','Jamnagar'
-UNION ALL SELECT 'Gujarat','Junagadh'
-UNION ALL SELECT 'Gujarat','Anand'
-UNION ALL SELECT 'Gujarat','Mehsana'
-
-UNION ALL SELECT 'Haryana','Gurgaon'
-UNION ALL SELECT 'Haryana','Faridabad'
-UNION ALL SELECT 'Haryana','Panipat'
-UNION ALL SELECT 'Haryana','Ambala'
-
-UNION ALL SELECT 'Himachal Pradesh','Shimla'
-UNION ALL SELECT 'Himachal Pradesh','Manali'
-UNION ALL SELECT 'Himachal Pradesh','Dharamshala'
-
-UNION ALL SELECT 'Jharkhand','Ranchi'
-UNION ALL SELECT 'Jharkhand','Jamshedpur'
-UNION ALL SELECT 'Jharkhand','Dhanbad'
-
-UNION ALL SELECT 'Karnataka','Bangalore'
-UNION ALL SELECT 'Karnataka','Mysore'
-UNION ALL SELECT 'Karnataka','Mangalore'
-UNION ALL SELECT 'Karnataka','Hubli'
-UNION ALL SELECT 'Karnataka','Belgaum'
-
-UNION ALL SELECT 'Kerala','Kochi'
-UNION ALL SELECT 'Kerala','Thiruvananthapuram'
-UNION ALL SELECT 'Kerala','Kozhikode'
-UNION ALL SELECT 'Kerala','Thrissur'
-
-UNION ALL SELECT 'Madhya Pradesh','Bhopal'
-UNION ALL SELECT 'Madhya Pradesh','Indore'
-UNION ALL SELECT 'Madhya Pradesh','Gwalior'
-UNION ALL SELECT 'Madhya Pradesh','Jabalpur'
-
-UNION ALL SELECT 'Maharashtra','Mumbai'
-UNION ALL SELECT 'Maharashtra','Pune'
-UNION ALL SELECT 'Maharashtra','Nagpur'
-UNION ALL SELECT 'Maharashtra','Nashik'
-UNION ALL SELECT 'Maharashtra','Aurangabad'
-UNION ALL SELECT 'Maharashtra','Thane'
-
-UNION ALL SELECT 'Manipur','Imphal'
-UNION ALL SELECT 'Meghalaya','Shillong'
-UNION ALL SELECT 'Mizoram','Aizawl'
-UNION ALL SELECT 'Nagaland','Kohima'
-
-UNION ALL SELECT 'Odisha','Bhubaneswar'
-UNION ALL SELECT 'Odisha','Cuttack'
-UNION ALL SELECT 'Odisha','Rourkela'
-
-UNION ALL SELECT 'Punjab','Ludhiana'
-UNION ALL SELECT 'Punjab','Amritsar'
-UNION ALL SELECT 'Punjab','Jalandhar'
-
-UNION ALL SELECT 'Rajasthan','Jaipur'
-UNION ALL SELECT 'Rajasthan','Jodhpur'
-UNION ALL SELECT 'Rajasthan','Udaipur'
-UNION ALL SELECT 'Rajasthan','Kota'
-UNION ALL SELECT 'Rajasthan','Ajmer'
-UNION ALL SELECT 'Rajasthan','Bikaner'
-
-UNION ALL SELECT 'Sikkim','Gangtok'
-
-UNION ALL SELECT 'Tamil Nadu','Chennai'
-UNION ALL SELECT 'Tamil Nadu','Coimbatore'
-UNION ALL SELECT 'Tamil Nadu','Madurai'
-UNION ALL SELECT 'Tamil Nadu','Salem'
-UNION ALL SELECT 'Tamil Nadu','Tiruchirappalli'
-
-UNION ALL SELECT 'Telangana','Hyderabad'
-UNION ALL SELECT 'Telangana','Warangal'
-UNION ALL SELECT 'Telangana','Karimnagar'
-
-UNION ALL SELECT 'Tripura','Agartala'
-
-UNION ALL SELECT 'Uttar Pradesh','Lucknow'
-UNION ALL SELECT 'Uttar Pradesh','Kanpur'
-UNION ALL SELECT 'Uttar Pradesh','Varanasi'
-UNION ALL SELECT 'Uttar Pradesh','Agra'
-UNION ALL SELECT 'Uttar Pradesh','Noida'
-UNION ALL SELECT 'Uttar Pradesh','Ghaziabad'
-
-UNION ALL SELECT 'Uttarakhand','Dehradun'
-UNION ALL SELECT 'Uttarakhand','Haridwar'
-UNION ALL SELECT 'Uttarakhand','Rishikesh'
-
-UNION ALL SELECT 'West Bengal','Kolkata'
-UNION ALL SELECT 'West Bengal','Howrah'
-UNION ALL SELECT 'West Bengal','Durgapur'
-UNION ALL SELECT 'West Bengal','Siliguri'
-) c
-ON s.state_name = c.state_name;
+INSERT INTO cities(state_id, city_name)
+values
+('1','Ahmedabad'),
+('1','Surat'),
+('1','Vadodara'),
+('2','Mumbai'),
+('2','Pune'),
+('2','Nagpur'),
+('3','Bangalore'),
+('3','Mysore'),
+('4','Chennai'),
+('4','Coimbatore'),
+('5','New Delhi'),
+('6','Los Angeles'),
+('6','San Francisco'),
+('6','San Diego'),
+('7','Houston'),
+('7','Dallas'),
+('7','Austin'),
+('8','New York City'),
+('9','Miami'),
+('9','Orlando'),
+('10','Chicago'),
+('11','Toronto'),
+('11','Ottawa'),
+('12','Montreal'),
+('12','Quebec City'),
+('13','Vancouver'),
+('14','Calgary'),
+('14','Edmonton'),
+('15','London'),
+('15','Manchester'),
+('15','Birmingham'),
+('16','Edinburgh'),
+('16','Glasgow'),
+('17','Cardiff'),
+('18','Belfast'),
+('19','Sydney'),
+('20','Melbourne'),
+('21','Brisbane'),
+('22','Perth'),
+('23','Munich'),
+('23','Nuremberg'),
+('24','Cologne'),
+('24','Düsseldorf'),
+('25','Berlin'),
+('26','Paris'),
+('27','Marseille'),
+('27','Nice'),
+('28','Lyon'),
+('29','Guangzhou'),
+('29','Shenzhen'),
+('30','Beijing'),
+('31','Shanghai'),
+('32','Chengdu'),
+('33','Tokyo'),
+('34','Osaka'),
+('35','Yokohama'),
+('36','Nagoya'),
+('37','São Paulo'),
+('38','Rio de Janeiro'),
+('39','Belo Horizonte'),
+('40','Johannesburg'),
+('40','Pretoria'),
+('41','Cape Town'),
+('42','Durban'),
+('43','Moscow'),
+('44','Saint Petersburg'),
+('45','Novosibirsk'),
+('46','Mexico City'),
+('47','Guadalajara'),
+('48','Monterrey'),
+('49','Milan'),
+('50','Rome'),
+('51','Naples'),
+('52','Madrid'),
+('53','Barcelona'),
+('54','Seville'),
+('55','Amsterdam'),
+('56','Rotterdam'),
+('57','Utrecht'),
+('58','Singapore'),
+('59','Dubai'),
+('60','Abu Dhabi'),
+('61','Sharjah'),
+('62','Riyadh'),
+('63','Mecca'),
+('64','Dammam'),
+('65','Istanbul'),
+('66','Ankara'),
+('67','Izmir'),
+('68','Jakarta'),
+('69','Bandung'),
+('70','Surabaya'),
+('71','Seoul'),
+('72','Busan'),
+('73','Incheon'),
+('74','Buenos Aires'),
+('75','Córdoba'),
+('76','Rosario'),
+('77','Lagos'),
+('78','Abuja'),
+('79','Kano');
 
 
--- =========================
+
+
+
+
 -- MARITAL STATUSES
--- =========================
 INSERT INTO marital_statuses (marital_status_name) VALUES
 ('Unmarried'),
 ('Married'),
@@ -188,9 +235,7 @@ INSERT INTO marital_statuses (marital_status_name) VALUES
 ('Widowed');
 
 
--- =========================
 -- COURSE TYPES
--- =========================
 INSERT INTO course_types (course_type_name) VALUES
 ('SSC'),
 ('HSC'),
@@ -214,9 +259,7 @@ INSERT INTO course_types (course_type_name) VALUES
 ('LLM'),
 ('PhD');
 
--- =========================
 -- LANGUAGES
--- =========================
 INSERT INTO languages (language_name) VALUES
 ('English'),
 ('Hindi'),
@@ -228,18 +271,14 @@ INSERT INTO languages (language_name) VALUES
 ('Japanese');
 
 
--- =========================
 -- PROFICIENCY LEVELS
--- =========================
 INSERT INTO proficiency_levels (proficiency_level_name) VALUES
 ('Beginner'),
 ('Intermediate'),
 ('Advanced'),
 ('Expert');
 
--- =========================
 -- TECHNOLOGIES
--- =========================
 
 INSERT INTO technologies (technology_name) VALUES
 ('Python'), ('JavaScript'), ('TypeScript'), ('Java'), ('C#'),
@@ -249,9 +288,7 @@ INSERT INTO technologies (technology_name) VALUES
 ('Kubernetes'), ('AWS'), ('Azure'), ('Terraform'), ('Git'),
 ('TensorFlow'), ('PyTorch'), ('GraphQL'), ('Elasticsearch');
 
--- =========================
 -- REFERENCE RELATIONSHIPS
--- =========================
 INSERT INTO reference_relationships (relationship_name) VALUES
 ('Friend'),
 ('Colleague'),
@@ -262,3 +299,5 @@ INSERT INTO reference_relationships (relationship_name) VALUES
 
 
 SELECT * FROM applicants;
+
+

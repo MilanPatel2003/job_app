@@ -8,4 +8,4 @@ const deleteApplicant = async (req,res) => {
     res.redirect("/")
 }
 
-export default deleteApplicant
+export default deleteApplicant 

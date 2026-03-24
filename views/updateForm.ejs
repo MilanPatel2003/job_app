@@ -20,7 +20,6 @@ button { padding: 6px 10px }
     <input type="hidden" id="workLength" value="<%= work.length %>">
 <input type="hidden" id="techLength" value="<%= applicant_technologies.length %>">
 
-<!-- ================= BASIC ================= -->
 <fieldset>
 <legend>Basic Details</legend>
 
@@ -71,7 +70,14 @@ button { padding: 6px 10px }
 </td>
 
 <td>Country</td>
-<td><input type="text" name="country" value="<%= basic.country || 'India' %>"></td>
+<td>
+      <select name="country" onchange="generateState()">
+         <option value="">select country</option>
+         <% countries.forEach(c => { %>
+        <option value="<%=c.country_id%>"><%= c.country_name %> </option>
+      <% }); %>
+               </select>
+</td>
 </tr>
 
 <tr>
@@ -88,11 +94,7 @@ button { padding: 6px 10px }
 <td>State</td>
 <td>
 <select name="state" onchange="generateCities()" id="stateSelect">
-<% states.forEach(s=>{ %>
-<option value="<%=s.state_id%>" <%= s.state_id==basic.state?'selected':'' %>>
-<%=s.state_name%>
-</option>
-<% }) %>
+
 </select>
 </td>
 
@@ -116,7 +118,6 @@ button { padding: 6px 10px }
 </table>
 </fieldset>
 
-<!-- ================= EDUCATION ================= -->
 <fieldset>
 <legend>Education</legend>
 
@@ -277,23 +278,40 @@ value="<%=p.proficiency_level_id%>"
 </form>
 
 <script>
-async function generateCities(){
-const stateId=document.getElementById("stateSelect").value
-const citySelect=document.getElementById("citySelect")
+ async function generateState() {
+            const countryId = document.getElementsByName("country")[0].value;
+            const stateSelect = document.getElementsByName("state")[0];
 
-const res=await fetch(`/combos/city/${stateId}`)
-const cities=await res.json()
+            const response = await fetch(`/combos/state/${countryId}`)
+            const states = await response.json();
+            console.log(states);
+            
 
-citySelect.innerHTML='<option>Select</option>'
+            stateSelect.innerHTML = `<option value="">Select a state</option>`
+            states.forEach(s=>{
+                const option = document.createElement("option");
+                option.value = s.state_id;
+                option.textContent = s.state_name
+                stateSelect.appendChild(option);
+            })
+        }
 
-cities.forEach(c=>{
-const opt=document.createElement("option")
-opt.value=c.city_id
-opt.textContent=c.city_name
-if(c.city_id=="<%=basic.city%>") opt.selected=true
-citySelect.appendChild(opt)
-})
-}
+
+        async function generateCities() {
+            const stateId = document.getElementsByName("state")[0].value;
+            const citySelect = document.getElementsByName("city")[0];
+
+            const response = await fetch(`/combos/city/${stateId}`);
+            const cities = await response.json();
+
+            citySelect.innerHTML = '<option value="">Select a city</option>';
+            cities.forEach(c => {
+                const option = document.createElement("option");
+                option.value = c.city_id;
+                option.textContent = c.city_name;
+                citySelect.appendChild(option);
+            });
+        }
 
 let workIndex = parseInt(document.getElementById("workLength").value) || 0;
 function addWork(){

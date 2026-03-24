@@ -157,14 +157,13 @@ export const updateApplication = async (req, res) => {
       }
     }
 
-    // =========================
 
     await conn.commit();
 
     res.redirect(`/display/${applicantId}`);
   } catch (err) {
     if (conn) await conn.rollback();
-    console.error("Update Error:", err);
+    console.error("Update Error:", err);   
     res.status(500).send("Error updating application");
   } finally {
     if (conn) conn.release();
